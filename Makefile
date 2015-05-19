@@ -1,4 +1,7 @@
 SRC		=	main.cpp \
+			GameEngine.cpp \
+			Cube.cpp \
+			AObject.cpp
 
 
 OBJS		=	$(SRC:.cpp=.o)

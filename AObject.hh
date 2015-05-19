@@ -14,21 +14,12 @@ class AObject
 {
 
 public:
-  AObject() :
-    _position(0, 0, 0), // On initialise la position a 0
-    _rotation(0, 0, 0), // pareil pour la rotation
-    _scale(1, 1, 1) // l'echelle est mise a 1
-  {
-  }
+  AObject();
   
-  virtual ~AObject()
-  {}
+  virtual ~AObject();
 
   // La fonction initialize charge l'objet ou le construit
-  virtual bool initialize()
-  {
-    return (true);
-  }
+  virtual bool initialize();
 
   // La fonction update sert a gerer le comportement de l'objet
   virtual void update(gdl::Clock const &clock, gdl::Input &input)
@@ -37,34 +28,13 @@ public:
   // La fonction draw sert a dessiner l'objet
   virtual void draw(gdl::AShader &shader, gdl::Clock const &clock) = 0;
 
-  void translate(glm::vec3 const &v)
-  {
-    _position += v;
-  }
+  void translate(glm::vec3 const &v);
 
-  void rotate(glm::vec3 const& axis, float angle)
-  {
-    _rotation += axis * angle;
-  }
+  void rotate(glm::vec3 const& axis, float angle);
 
-  void scale(glm::vec3 const& scale)
-  {
-    _scale *= scale;
-  }
+  void scale(glm::vec3 const& scale);
 
-  glm::mat4 getTransformation()
-  {
-    glm::mat4 transform(1); // On cree une matrice identite
-    // On applique ensuite les rotations selon les axes x, y et z
-    transform = glm::rotate(transform, _rotation.x, glm::vec3(1, 0, 0));
-    transform = glm::rotate(transform, _rotation.y, glm::vec3(0, 1, 0));
-    transform = glm::rotate(transform, _rotation.z, glm::vec3(0, 0, 1));
-    // On effectue ensuite la translation
-    transform = glm::translate(transform, _position);
-    // Et pour finir, on fait la mise a l'echelle
-    transform = glm::scale(transform, _scale);
-    return (transform);
-  }
+  glm::mat4 getTransformation();
 
 protected:
   glm::vec3 _position;
