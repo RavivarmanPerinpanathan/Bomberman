@@ -1,3 +1,11 @@
+#ifndef	CUBE
+# define CUBE
+#include "Attribute.hh"
+#include "Model.hh"
+#include "Geometry.hh"
+#include "Texture.hh"
+#include "AObject.hh"
+
 class Cube : public AObject
 {
 private:
@@ -78,8 +86,7 @@ public:
     _geometry.pushUv(glm::vec2(1.0f, 0.0f));
     _geometry.pushUv(glm::vec2(1.0f, 1.0f));
     _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-    // Tres important, on n'oublie pas de build la geometrie pour envoyer ses informations a la carte
-graphique
+    // Tres important, on n'oublie pas de build la geometrie pour envoyer ses informations a la carte graphique
   _geometry.build();
  return (true);
   }
@@ -104,4 +111,6 @@ graphique
     // Et on dessine notre cube
     _geometry.draw(shader, getTransformation(), GL_QUADS);
   }
-}
+};
+
+#endif	// CUBE

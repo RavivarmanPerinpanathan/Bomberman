@@ -1,3 +1,6 @@
+#ifndef	AOBJECT
+# define	AOBJECT
+
 // Permet d'inclure la SDL 2
 #include <SdlContext.hh>
 // Inclus la bibliotheque de mathematiques
@@ -68,3 +71,5 @@ protected:
   glm::vec3 _rotation;
   glm::vec3 _scale;
 };
+
+#endif	// AOBJECT

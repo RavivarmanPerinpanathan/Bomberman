@@ -1,3 +1,6 @@
+#ifndef	GAME_ENGINE
+# define	GAME_ENGINE
+
 #pragma once
 #include <Game.hh>
 #include <SdlContext.hh>
@@ -48,8 +51,7 @@ GameEngine()
   }
   bool update()
   {
-    // Si la touche ECHAP est appuyee ou si l'utilisateur ferme la fenetre, on quitte le
-    programme
+    // Si la touche ECHAP est appuyee ou si l'utilisateur ferme la fenetre, on quitte le programme
       if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
 	return false;
     // Mise a jour des inputs et de l'horloge de jeu
@@ -64,10 +66,9 @@ GameEngine()
   {
     // On clear l'ecran
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // pour utiliser un shader (pour que ce soit ce dernier qui dessine la geometrie) il faut le
-    binder.
+    // pour utiliser un shader (pour que ce soit ce dernier qui dessine la geometrie) il faut le binder.
       // Un seul shader peut etre actif en meme temps
-      _shader.bind();
+    _shader.bind();
     // On dessine tous les objets composant la scene
     for (size_t i = 0; i < _objects.size(); ++i)
       _objects[i]->draw(_shader, _clock);
@@ -87,3 +88,5 @@ private:
   gdl::BasicShader _shader;
   std::vector<AObject*> _objects;
 };
+
+#endif	// GAME_ENGINE
