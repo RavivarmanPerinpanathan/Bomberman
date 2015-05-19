@@ -22,7 +22,7 @@ public:
   {
     _speed = 10.0f;
     // On charge la texture qui sera affichee sur chaque face du cube
-    if (_texture.load("./assets/texture.tga") == false)
+    if (_texture.load("./LibBomberman_linux_x64/assets/marvin.fbm/Main_texture_diffuse2.tga") == false)
       {
 	std::cerr << "Cannot load the cube texture" << std::endl;
 	return (false);

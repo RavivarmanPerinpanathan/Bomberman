@@ -26,8 +26,8 @@ GameEngine()
     // On active le test de profondeur d'OpenGL pour que les pixels que l'oeil ne voit pas ne s'affichent pas
     glEnable(GL_DEPTH_TEST);
     // On cree un shader, petit programme permettant de dessiner nos objets a l'ecran
-    if (!_shader.load("./Shaders/basic.fp", GL_FRAGMENT_SHADER) // le fragment shader se charge de dessiner les pixels
-	|| !_shader.load("./Shaders/basic.vp", GL_VERTEX_SHADER) // le vertex shader s'occupe de projeter les points sur l'ecran
+    if (!_shader.load("./LibBomberman_linux_x64/shaders/basic.fp", GL_FRAGMENT_SHADER) // le fragment shader se charge de dessiner les pixels
+	|| !_shader.load("./LibBomberman_linux_x64/shaders/basic.vp", GL_VERTEX_SHADER) // le vertex shader s'occupe de projeter les points sur l'ecran
 	|| !_shader.build()) // il faut ensuite compiler son shader
       return false;
     // On place ensuite la camera (sa projection ainsi que sa transformation)

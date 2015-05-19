@@ -1,4 +1,4 @@
-#ifndef	AOBJECT
+#ifndef		AOBJECT
 # define	AOBJECT
 
 // Permet d'inclure la SDL 2
@@ -72,4 +72,4 @@ protected:
   glm::vec3 _scale;
 };
 
-#endif	// AOBJECT
+#endif		// AOBJECT
