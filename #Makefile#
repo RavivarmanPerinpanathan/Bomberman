@@ -1,4 +1,4 @@
-SRC		=	main.cpp \
+RC		=	main.cpp \
 			Coord.cpp \
 			Field.cpp \
 			Graphic.cpp \

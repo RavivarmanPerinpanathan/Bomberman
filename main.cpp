@@ -9,7 +9,8 @@
 //
 
 #include <cstdlib>
-#include "GameEngine.hpp"
+#include "GameEngine.hh"
+
 int	main()
 {
   //On crees on engine GameEngine  engine;
