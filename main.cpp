@@ -19,6 +19,5 @@ int	main()
     return (EXIT_FAILURE);
   while (engine.update() == true)
     engine.draw();
-  return
-    EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
