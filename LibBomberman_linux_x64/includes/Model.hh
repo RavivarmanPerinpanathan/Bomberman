@@ -63,5 +63,4 @@ namespace gdl
 
 		std::map<std::string, SSubAnimationDatas>	_subAnims;
 	};
-
 }

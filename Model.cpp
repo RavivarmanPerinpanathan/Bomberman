@@ -8,19 +8,20 @@
 // Last update Wed May 20 02:36:03 2015 ravivarman perinpanathan
 //
 
+#include <Model.hh>
 #include "Model.hh"
 
-Ironman::Ironman()
+Model::Ironman::Ironman()
 {
 }
-~Ironman::Ironman()
+Model::Ironman::~Ironman()
 {
 }
 
-bool	Ironman::initialize()
+bool	Model::Ironman::initialize()
 {
   _speed = 20.0f;
-  if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
+  if (gdl::Model::_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
     {
       std::cerr << "Cannot load marvin.fbx" << std::endl;
       return (false);
@@ -30,7 +31,7 @@ bool	Ironman::initialize()
   return (true);
 }
 
-void	Ironman::initialize(float const & x, float const & y, float const & z)
+void	Model::Ironman::initialize(float const & x, float const & y, float const & z)
 {
  if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
     {
@@ -41,14 +42,14 @@ void	Ironman::initialize(float const & x, float const & y, float const & z)
  this-> _rotation.setPos(0, 0, 0);
 }
 
-void	Ironman::update(gdl::Clock const &clock, gdl::Input &input)
+void	Model::Ironman::update(gdl::Clock const &clock, gdl::Input &input)
 {
   _model.update(clock);
   if (input.getKey(SDLK_F1))
     //do play
 }
 
-void	Ironman::drow()//(gdl::AShader &shader, gdl::Clock const &clock)
+void	Model::Ironman::drow() //(gdl::AShader &shader, gdl::Clock const &clock)
 {
   //(void)clock;
   //_model.draw();

@@ -2,8 +2,8 @@ SRC		=	main.cpp \
 			GameEngine.cpp \
 			Cube.cpp \
 			AObject.cpp \
-#			Pos3f.cpp \
-			Model.cpp
+			Model.cpp \
+#			Pos3f.cpp
 
 
 OBJS		=	$(SRC:.cpp=.o)

@@ -16,7 +16,8 @@
 #include "Texture.hh"
 #include "Attribute.hh"
 #include "Pos3f.hh"
-#include "Model.hh"
+
+class FbxModel;
 
 namespace Model
 {
@@ -33,7 +34,7 @@ namespace Model
   private:
     
     gdl::Geometry	_geometry;
-    //gdl::Model		_model;    
+    FbxModel		_model;    
     float		_speed;
     Pos3f		_pos;
     Pos3f		_rotation;
