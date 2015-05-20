@@ -1,7 +1,9 @@
 SRC		=	main.cpp \
 			GameEngine.cpp \
 			Cube.cpp \
-			AObject.cpp
+			AObject.cpp \
+#			Pos3f.cpp \
+			Model.cpp
 
 
 OBJS		=	$(SRC:.cpp=.o)
@@ -16,7 +18,6 @@ CXXFLAGS	+=	-ILibBomberman_linux_x64/includes/
 LDFLAGS		+=	-Wl,-rpath=LibBomberman_linux_x64/libs
 LDFLAGS		+=	-LLibBomberman_linux_x64/libs
 LDFLAGS		+=	-lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -lGLU -lSDL -ldl
-
 
 all	:		$(NAME)
 
