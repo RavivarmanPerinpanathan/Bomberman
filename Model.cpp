@@ -52,10 +52,11 @@ void	Model::Ironman::update(gdl::Clock const &clock, gdl::Input &input)
 
 void	Model::Ironman::draw(gdl::AShader &shader, gdl::Clock const &clock)
 {
-  this->_model.draw();
+    (void)clock;
+  this->_model.draw(shader, getTransformation(), GL_QUADS);
   glPushMatrix();
   glTranslatef(this->_pos.getX(), this->_pos.getY(), this->_pos.getZ());
   glRotatef(this->_rotation.getX(), this->_rotation.getY(), this->_rotation.getZ(), 1);
-  this->_model.draw();
+  this->_model.draw(shader, getTransformation(), GL_QUADS);
   glPopMatrix();
 }
