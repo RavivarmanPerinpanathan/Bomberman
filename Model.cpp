@@ -10,6 +10,8 @@
 
 #include <Model.hh>
 #include "Model.hh"
+#include "LibBomberman_linux_x64/includes/GL/glew.h"
+#include "LibBomberman_linux_x64/includes/SDL_keycode.h"
 
 Model::Ironman::Ironman()
 {
@@ -21,12 +23,12 @@ Model::Ironman::~Ironman()
 bool	Model::Ironman::initialize()
 {
   _speed = 20.0f;
-  if (gdl::Model::_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
+  if (this->_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
     {
       std::cerr << "Cannot load marvin.fbx" << std::endl;
       return (false);
     }
-  this->_pos.setPos(1.0 * SIZEBLOC, -280.0, 1 * SIZEBLOCK);
+  this->_pos.setPos(1.0 * 5 /*SIZEBLOC*/, -280.0, 1 * 5/*SIZEBLOCK*/);
   this->_rotation.setPos(0, 0, 0);
   return (true);
 }
@@ -36,7 +38,7 @@ void	Model::Ironman::initialize(float const & x, float const & y, float const & 
  if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
     {
       std::cerr << "Cannot load marvin.fbx" << std::endl;
-      return (false);
+      return ;
     }
  this-> _pos.setPos(x, y, z);
  this-> _rotation.setPos(0, 0, 0);
@@ -44,18 +46,16 @@ void	Model::Ironman::initialize(float const & x, float const & y, float const & 
 
 void	Model::Ironman::update(gdl::Clock const &clock, gdl::Input &input)
 {
-  _model.update(clock);
-  if (input.getKey(SDLK_F1))
-    //do play
+    (void)clock;
+    (void)input;
 }
 
-void	Model::Ironman::drow() //(gdl::AShader &shader, gdl::Clock const &clock)
+void	Model::Ironman::draw(gdl::AShader &shader, gdl::Clock const &clock)
 {
-  //(void)clock;
-  //_model.draw();
+  this->_model.draw();
   glPushMatrix();
   glTranslatef(this->_pos.getX(), this->_pos.getY(), this->_pos.getZ());
   glRotatef(this->_rotation.getX(), this->_rotation.getY(), this->_rotation.getZ(), 1);
-  this->model.draw();
+  this->_model.draw();
   glPopMatrix();
 }

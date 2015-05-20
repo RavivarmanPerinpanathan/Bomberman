@@ -12,10 +12,15 @@
 #define	_MODEL_HH_
 
 #include "AObject.hh"
-#include "Geometry.hh"
+/*#include "Geometry.hh"
 #include "Texture.hh"
-#include "Attribute.hh"
+#include "Attribute.hh"*/
 #include "Pos3f.hh"
+#include "LibBomberman_linux_x64/includes/Model.hh"
+#include "LibBomberman_linux_x64/includes/Geometry.hh"
+#include "LibBomberman_linux_x64/includes/Clock.hh"
+#include "LibBomberman_linux_x64/includes/Input.hh"
+#include "LibBomberman_linux_x64/includes/AShader.hh"
 
 class FbxModel;
 
@@ -34,7 +39,7 @@ namespace Model
   private:
     
     gdl::Geometry	_geometry;
-    FbxModel		_model;    
+    gdl::Model  _model;
     float		_speed;
     Pos3f		_pos;
     Pos3f		_rotation;
