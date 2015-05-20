@@ -3,7 +3,7 @@ SRC		=	main.cpp \
 			Cube.cpp \
 			AObject.cpp \
 			Model.cpp \
-#			Pos3f.cpp
+			Pos3f.cpp
 
 
 OBJS		=	$(SRC:.cpp=.o)
@@ -12,7 +12,7 @@ NAME		=	bomberman
 
 CXX		=	g++
 
-CXXFLAGS	+=	-ILibBomberman_linux_x64/includes/
+CXXFLAGS	+=	-ILibBomberman_linux_x64/includes/ -W -Wall -Wextra -Werror
 #CPPFLAGS	+=	-Wall -Werror -Wextra
 
 LDFLAGS		+=	-Wl,-rpath=LibBomberman_linux_x64/libs
