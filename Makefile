@@ -2,7 +2,7 @@ SRC		=	main.cpp \
 			GameEngine.cpp \
 			Cube.cpp \
 			AObject.cpp \
-			Model.cpp \
+#			Marvin.cpp \
 			Pos3f.cpp
 
 

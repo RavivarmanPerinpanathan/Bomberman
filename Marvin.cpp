@@ -9,18 +9,19 @@
 //
 
 #include <Model.hh>
-#include "Model.hh"
+#include "Marvin.hh"
 
-Model::Ironman::Ironman()
-{
-
-}
-Model::Ironman::~Ironman()
+Marvin::Marvin()
 {
 
 }
 
-bool	Model::Ironman::initialize()
+Marvin::~Marvin()
+{
+
+}
+
+bool	Marvin::initialize()
 {
   _speed = 20.0f;
   if (gdl::Model::_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
@@ -33,7 +34,7 @@ bool	Model::Ironman::initialize()
   return (true);
 }
 
-void	Model::Ironman::initialize(float const & x, float const & y, float const & z)
+void	Marvin::initialize(float const & x, float const & y, float const & z)
 {
  if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false)
     {
@@ -44,14 +45,14 @@ void	Model::Ironman::initialize(float const & x, float const & y, float const & 
  this-> _rotation.setPos(0, 0, 0);
 }
 
-void	Model::Ironman::update(gdl::Clock const &clock, gdl::Input &input)
+void	Marvin::update(gdl::Clock const &clock, gdl::Input &input)
 {
   _model.update(clock);
   if (input.getKey(SDLK_F1))
     //do play
 }
 
-void	Model::Ironman::drow() //(gdl::AShader &shader, gdl::Clock const &clock)
+void	Marvin::drow() //(gdl::AShader &shader, gdl::Clock const &clock)
 {
   //(void)clock;
   //_model.draw();

@@ -22,6 +22,12 @@ void AObject::translate(glm::vec3 const &v)
   _position += v;
 }
 
+void AObject::update(gdl::Clock const &clock, gdl::Input &input)
+{
+  (void)clock;
+  (void)input;
+}
+
 void AObject::rotate(glm::vec3 const& axis, float angle)
 {
   _rotation += axis * angle;

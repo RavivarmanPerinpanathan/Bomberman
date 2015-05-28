@@ -2,11 +2,12 @@
 # define	GAME_ENGINE
 
 #pragma once
+#include <vector>
 #include <Game.hh>
 #include <SdlContext.hh>
 #include "AObject.hh"
 #include "Cube.hh"
-#include <vector>
+
 
 /*
 On cree sa class GameEngine qui herite de game

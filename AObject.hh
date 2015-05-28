@@ -1,12 +1,13 @@
 #ifndef		AOBJECT
 # define	AOBJECT
 
+
+#include <iostream>
 // Permet d'inclure la SDL 2
 #include <SdlContext.hh>
 // Inclus la bibliotheque de mathematiques
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <iostream>
 #include <BasicShader.hh>
 // La classe abstraite representant un objet avec sa position, sa rotation et son echelle
 

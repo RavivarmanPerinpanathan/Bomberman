@@ -1,7 +1,8 @@
 #ifndef	CUBE
 # define CUBE
-#include "Attribute.hh"
+
 #include <Model.hh>
+#include "Attribute.hh"
 #include "Geometry.hh"
 #include "Texture.hh"
 #include "AObject.hh"
