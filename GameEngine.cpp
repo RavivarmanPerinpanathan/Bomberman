@@ -33,6 +33,11 @@ bool GameEngine::initialize()
     if (cube->initialize() == false)
       return (false);
     _objects.push_back(cube);
+
+    AObject *marvin = new Marvin();
+    if (marvin->initialize() == false)
+      return (false);
+    _objects.push_back(marvin);
     return true;
 }
 

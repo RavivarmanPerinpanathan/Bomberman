@@ -5,12 +5,11 @@
 // Login   <perinp_r@epitech.net>
 // 
 // Started on  Tue May 19 16:56:42 2015 ravivarman perinpanathan
-// Last update Wed May 20 02:26:45 2015 ravivarman perinpanathan
+// Last update Thu Jun  4 15:50:02 2015 ravivarman perinpanathan
 //
 
 #ifndef _MARVIN_HH_
 #define	_MARVIN_HH_
-
 
 #include <Model.hh>
 #include "AObject.hh"
@@ -18,6 +17,13 @@
 #include "Texture.hh"
 #include "Attribute.hh"
 #include "Pos3f.hh"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <BasicShader.hh>
+#include <SdlContext.hh>
+#include <Input.hh>
+#include <Clock.hh>
+#include <Game.hh>
 
 class Marvin : public AObject
 {
@@ -28,7 +34,7 @@ public:
   virtual void	initialize(float const &, float const &, float const &);
   virtual void	update(gdl::Clock const &clock, gdl::Input & input);
   virtual void	draw(gdl::AShader &shader, gdl::Clock const &clock);
-  
+  //virtual void	draw();
 private:
   
   gdl::Geometry	_geometry;
