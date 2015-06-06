@@ -5,7 +5,6 @@ SRCS		=	main.cpp		\
 			Cube.cpp		\
 			AObject.cpp		\
 			Marvin.cpp		\
-			Pos3f.cpp		\
 			$(SRCS_DIR)/Bomb.cpp	\
 			$(SRCS_DIR)/Map.cpp	\
 			$(SRCS_DIR)/Game.cpp
