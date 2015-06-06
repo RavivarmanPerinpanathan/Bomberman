@@ -1,16 +1,21 @@
-SRC		=	main.cpp \
-			GameEngine.cpp \
-			Cube.cpp \
-			AObject.cpp \
-			Marvin.cpp \
-			Pos3f.cpp
+SRCS_DIR	=	srcs
+
+SRCS		=	main.cpp		\
+			GameEngine.cpp		\
+			Cube.cpp		\
+			AObject.cpp		\
+			Marvin.cpp		\
+			Pos3f.cpp		\
+			$(SRCS_DIR)/Map.cpp
 
 
-OBJS		=	$(SRC:.cpp=.o)
+OBJS		=	$(SRCS:.cpp=.o)
 
 NAME		=	bomberman
 
 CXX		=	g++
+
+RM		=	rm -f
 
 CXXFLAGS	+=	-ILibBomberman_linux_x64/includes/ -W -Wall -Wextra -Werror
 
@@ -24,11 +29,11 @@ $(NAME)	:		$(OBJS)
 			$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean	:
-			rm -f $(OBJS)
+			$(RM) $(OBJS)
 
 fclean :		clean
-			rm -f $(NAME)
+			$(RM) $(NAME)
 
-re	:			fclean all
+re	:		fclean all
 
 .PHONY	:		all clean fclean re
