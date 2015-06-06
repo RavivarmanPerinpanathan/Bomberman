@@ -5,7 +5,7 @@
 // Login   <perinp_r@epitech.net>
 // 
 // Started on  Tue May 19 16:27:01 2015 ravivarman perinpanathan
-// Last update Thu Jun  4 16:18:33 2015 ravivarman perinpanathan
+// Last update Fri Jun  5 14:44:44 2015 ravivarman perinpanathan
 //
 
 #include <Model.hh>
@@ -27,36 +27,34 @@ bool	Marvin::initialize()
       std::cerr << "Cannot load marvin.fbx" << std::endl;
       return (false);
     }
-  translate(glm::vec3(1, -0.5, 1));
+  translate(glm::vec3(1, -0.1, 20));
   scale(glm::vec3(0.025, 0.025, 0.025));
   return (true);
 }
 
-void	Marvin::initialize(float const & x, float const & y, float const & z)
-{
-  if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx"))
-    {
-      std::cerr << "Cannot load marvin.fbx" << std::endl;
-    }
- this-> _pos.setPos(x, y, z);
- this-> _rotation.setPos(0, 0, 0);
-}
+// void	Marvin::initialize(float const & x, float const & y, float const & z)
+// {
+//   if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx"))
+//     {
+//       std::cerr << "Cannot load marvin.fbx" << std::endl;
+//     }
+//   this-> _pos.setPos(x, y, z);
+//   this-> _rotation.setPos(0, 0, 0);
+// }
 
 void	Marvin::update(gdl::Clock const &clock, gdl::Input &input)
 {
-  (void)clock;
-  (void)input;
-  // if (input.getKey(SDLK_F1))
-  //  do play;
+ if (input.getKey(SDLK_UP))
+    translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_DOWN))
+    translate(glm::vec3(0, 0, 1) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_LEFT))
+    translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_RIGHT))
+    translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
 }
 
 void	Marvin::draw(gdl::AShader &shader, gdl::Clock const &clock)
 {
-  //(void)clock;
   _model.draw(shader, getTransformation(), clock.getElapsed());
-  /*glPushMatrix();
-  glTranslatef(this->_pos.getX(), this->_pos.getY(), this->_pos.getZ());
-  glRotatef(this->_rotation.getX(), this->_rotation.getY(), this->_rotation.getZ(), 1);
-  this->model.draw();
-  glPopMatrix();*/
 }
