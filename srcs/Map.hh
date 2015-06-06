@@ -35,6 +35,6 @@ private:
   int					_width;
   int					_height;
   std::map<std::pair<int, int>, status> _map;
-}
+};
 
 #endif /* !__MAP_HH__ */
