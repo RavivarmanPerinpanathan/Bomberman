@@ -10,7 +10,9 @@ public:
   Game();
   ~Game();
   Game(Game const &);
-  Game &operator=(Game const &);
+  Game		&operator=(Game const &);
+
+  void		run();
 };
 
 #endif /* !__GAME_HH__ */

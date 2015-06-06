@@ -20,3 +20,8 @@ Game		&Game::operator=(Game const &c)
   (void)c;
   return (*this);
 }
+
+void		Game::run()
+{
+  /* appel de toutes les fonctions */
+}
