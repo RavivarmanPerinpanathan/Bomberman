@@ -10,15 +10,21 @@
 
 #include <cstdlib>
 #include "GameEngine.hh"
+#include "srcs/Play.hh"
 
 int	main()
 {
-  GameEngine engine;
+  // GameEngine engine;
   //On crees on engine GameEngine  engine;
-  if (engine.initialize() == false)
-    return (EXIT_FAILURE);
-  while (engine.update() == true)
-    engine.draw();
-  return
-    EXIT_SUCCESS;
+  // if (engine.initialize() == false)
+  //   return (EXIT_FAILURE);
+  // while (engine.update() == true)
+  //   engine.draw();
+  // return
+  //   EXIT_SUCCESS;
+
+  Play	play;
+
+  play.showPlay();
+  return (0);
 }

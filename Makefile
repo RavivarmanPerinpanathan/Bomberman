@@ -1,12 +1,15 @@
 SRCS_DIR	=	srcs
 
-SRCS		=	main.cpp		\
-			GameEngine.cpp		\
-			Cube.cpp		\
-			AObject.cpp		\
-			Marvin.cpp		\
-			$(SRCS_DIR)/Bomb.cpp	\
-			$(SRCS_DIR)/Map.cpp	\
+SRCS		=	main.cpp			\
+			GameEngine.cpp			\
+			Cube.cpp			\
+			AObject.cpp			\
+			Marvin.cpp			\
+			$(SRCS_DIR)/Bomb.cpp		\
+			$(SRCS_DIR)/Map.cpp		\
+			$(SRCS_DIR)/Play.cpp		\
+			$(SRCS_DIR)/Player.cpp		\
+			$(SRCS_DIR)/Bot.cpp		\
 			$(SRCS_DIR)/Game.cpp
 
 
