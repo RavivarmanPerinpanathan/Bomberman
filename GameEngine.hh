@@ -7,6 +7,7 @@
 #include <SdlContext.hh>
 #include "AObject.hh"
 #include "Cube.hh"
+#include "Intro.hh"
 #include "Marvin.hh"
 
 

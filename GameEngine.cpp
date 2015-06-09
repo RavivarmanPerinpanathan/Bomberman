@@ -20,19 +20,24 @@ bool GameEngine::initialize()
     glm::mat4 projection;
     glm::mat4 transformation;
     // La projection de la camera correspond a la maniere dont les objets vont etre dessine a l'ecran
-    projection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+    projection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);//perspective(0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f);//perspective(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);
     // La transformation de la camera correspond a son orientation et sa position
     // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
-    transformation = glm::lookAt(glm::vec3(0, 10, -30), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    transformation = glm::lookAt(glm::vec3(0, 20, 50), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     // On doit toujours binder le shader avant d'appeler les methodes setUniform
     _shader.bind();
     _shader.setUniform("view", transformation);
     _shader.setUniform("projection", projection);
     // On va ensuite creer un cube que l'on va ajouter a la liste d'objets
-    AObject *cube = new Cube();
-    if (cube->initialize() == false)
+    // AObject *cube = new Cube();
+    // if (cube->initialize() == false)
+    //   return (false);
+    // _objects.push_back(cube);
+
+    AObject *intro = new Intro();
+    if (intro->initialize() == false)
       return (false);
-    _objects.push_back(cube);
+    _objects.push_back(intro);
 
     AObject *marvin = new Marvin();
     if (marvin->initialize() == false)
