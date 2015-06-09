@@ -5,7 +5,7 @@
 // Login   <tran_2@epitech.net>
 // 
 // Started on  Sun Jun  7 13:02:04 2015 Viet Dung Tran
-// Last update Tue Jun  9 12:40:28 2015 ravivarman perinpanathan
+// Last update Tue Jun  9 13:42:14 2015 Viet Dung Tran
 //
 
 #include <Model.hh>
@@ -30,23 +30,24 @@ bool	Intro::initialize()
   // tout les pushVertex qui suivent seront de cette couleur
   // On y push les vertices d une premiere face
    //glm::mat4 _rotate;
-
-   rotate(glm::vec3(0, 0, 0), 100);
-   _geometry.pushVertex(glm::vec3(10, -10, 10));
-   _geometry.pushVertex(glm::vec3(10, 10, 0));
-   _geometry.pushVertex(glm::vec3(-10, 10, 0));
-   _geometry.pushVertex(glm::vec3(-10, -10, 10));
-  // Les UVs d'une premiere face
-  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
-  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
-  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
-  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-   translate(glm::vec3(1, -0.1, 10));
+   
+   rotate(glm::vec3(0, 0, 5), -90);
+   _geometry.pushVertex(glm::vec3(19, -19, 34));
+   _geometry.pushVertex(glm::vec3(19, 19, 34));
+   _geometry.pushVertex(glm::vec3(-19, 19, 19));
+   _geometry.pushVertex(glm::vec3(-19, -19, 19));
+   // Les UVs d'une premiere face
+   _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+   _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+   _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+   _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+   translate(glm::vec3(-15, 0.2, 0));
+  //translate(glm::vec3(1, -0.1, 10));
    //scale(glm::vec3(0.025, 0.025, 0.025));
    //usleep(100000);
-  _geometry.build();
-  std::cout << "end intro" << std::endl;
-  return (true);
+   _geometry.build();
+   std::cout << "end intro" << std::endl;
+   return (true);
 }
 
 void	Intro::draw(gdl::AShader &shader, gdl::Clock const &clock)
