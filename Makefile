@@ -24,12 +24,12 @@ CXXFLAGS	+=	-ILibBomberman_linux_x64/includes/ -W -Wall -Wextra -Werror
 LDFLAGS		+=	-Wl,-rpath=LibBomberman_linux_x64/libs
 LDFLAGS		+=	-LLibBomberman_linux_x64/libs
 LDFLAGS		+=	-lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -lGLU -lSDL -ldl
-ADFLAGS		+=	-lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+SFMLFLAGS	+=	-lsfml-audio
 
 all	:		$(NAME)
 
 $(NAME)	:		$(OBJS)
-			$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS) $(ADFLAGS)
+			$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS) $(SFMLFLAGS)
 
 clean	:
 			$(RM) $(OBJS)

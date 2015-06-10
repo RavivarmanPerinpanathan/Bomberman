@@ -1,5 +1,9 @@
 #include "Audio.hh"
 
+/*
+ * PUBLIC FUNCTIONS MEMBERS
+ */
+
 Audio::Audio()
 {
   this->introMusic_ = new sf::Music;
@@ -11,11 +15,19 @@ Audio::Audio()
   introMusic_->openFromFile("sounds/introMusic.ogg");
   inGameMusic_->openFromFile("sounds/inGameMusic.ogg");
   gameOverMusic_->openFromFile("sounds/gameOverMusic.ogg");
-  //  bombSoundBuffer_.LoadFromFile():
+  //bombSoundBuffer_.LoadFromFile("sounds/bombSound.wav"):
 
-  this->PFTab_[0] = &Audio::playIntroMusic;
-  this->PFTab_[1] = &Audio::playInGameMusic;
-  this->PFTab_[2] = &Audio::playGameOverMusic;
+  this->PFArr_[0] = &Audio::playIntroMusic;
+  this->PFArr_[1] = &Audio::playInGameMusic;
+  this->PFArr_[2] = &Audio::playGameOverMusic;
+
+  this->SFArr_[0] = &Audio::stopIntroMusic;
+  this->SFArr_[1] = &Audio::stopInGameMusic;
+  this->SFArr_[2] = &Audio::stopGameOverMusic;
+
+  this->SVFArr_[0] = &Audio::setIntroMusicVolume;
+  this->SVFArr_[1] = &Audio::setInGameMusicVolume;
+  this->SVFArr_[2] = &Audio::setGameOverMusicVolume;
 }
 
 Audio::~Audio()
@@ -27,8 +39,22 @@ Audio::~Audio()
 
 void Audio::playMusic(size_t music)
 {
-  (this->*PFTab_[music])();
+  (this->*PFArr_[music])();
 }
+
+void Audio::stopMusic(size_t music)
+{
+  (this->*SFArr_[music])();
+}
+
+void Audio::setVolume(size_t music, float volume)
+{
+  (this->*SVFArr_[music])(volume);
+}
+
+/*
+ * PRIVATE FUNCTIONS MEMBERS
+ */
 
 void Audio::playIntroMusic()
 {
