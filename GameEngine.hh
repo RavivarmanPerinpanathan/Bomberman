@@ -8,7 +8,7 @@
 #include "AObject.hh"
 #include "Cube.hh"
 #include "Marvin.hh"
-
+#include "Audio.hh"
 
 /*
 On cree sa class GameEngine qui herite de game
@@ -22,6 +22,8 @@ public:
   bool update();
   void draw();
   ~GameEngine();
+
+  Audio audio;
 
 private:
   gdl::SdlContext _context;

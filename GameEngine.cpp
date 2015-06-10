@@ -38,6 +38,10 @@ bool GameEngine::initialize()
     if (marvin->initialize() == false)
       return (false);
     _objects.push_back(marvin);
+
+    this->audio.setGameOverMusicVolume(80);
+    this->audio.playGameOverMusic();
+
     return true;
 }
 
