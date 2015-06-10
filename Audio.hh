@@ -3,12 +3,23 @@
 
 #include <SFML/Audio.hpp>
 
+typedef enum	e_music
+  {
+    INTRO = 0,
+    INGAME,
+    GAMEOVER,
+  }		t_music;
+
 class Audio
 {
 public:
   Audio();
   ~Audio();
-  
+
+  void (Audio::*PFTab_[3])();
+
+  void playMusic(size_t);
+
   void playIntroMusic();
   void playInGameMusic();
   void playGameOverMusic();

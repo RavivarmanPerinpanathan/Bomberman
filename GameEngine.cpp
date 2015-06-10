@@ -39,8 +39,9 @@ bool GameEngine::initialize()
       return (false);
     _objects.push_back(marvin);
 
-    this->audio.setGameOverMusicVolume(80);
-    this->audio.playGameOverMusic();
+    // Try playMusic with INTRO, INGAME or GAMEOVER.
+    this->audio.setGameOverMusicVolume(50);
+    this->audio.playMusic(INGAME);
 
     return true;
 }

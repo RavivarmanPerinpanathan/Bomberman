@@ -12,6 +12,10 @@ Audio::Audio()
   inGameMusic_->openFromFile("sounds/inGameMusic.ogg");
   gameOverMusic_->openFromFile("sounds/gameOverMusic.ogg");
   //  bombSoundBuffer_.LoadFromFile():
+
+  this->PFTab_[0] = &Audio::playIntroMusic;
+  this->PFTab_[1] = &Audio::playInGameMusic;
+  this->PFTab_[2] = &Audio::playGameOverMusic;
 }
 
 Audio::~Audio()
@@ -21,6 +25,11 @@ Audio::~Audio()
   delete gameOverMusic_;
 }
 
+void Audio::playMusic(size_t music)
+{
+  (this->*PFTab_[music])();
+}
+
 void Audio::playIntroMusic()
 {
   this->introMusic_->play();
@@ -28,7 +37,7 @@ void Audio::playIntroMusic()
 
 void Audio::playInGameMusic()
 {
-  this->introMusic_->play();
+  this->inGameMusic_->play();
 }
 
 void Audio::playGameOverMusic()
@@ -43,7 +52,7 @@ void Audio::stopIntroMusic()
 
 void Audio::stopInGameMusic()
 {
-  this->introMusic_->stop();
+  this->inGameMusic_->stop();
 }
 
 void Audio::stopGameOverMusic()
