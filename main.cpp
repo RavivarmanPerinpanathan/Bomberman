@@ -15,7 +15,7 @@
 int	main()
 {
   // GameEngine engine;
-  //On crees on engine GameEngine  engine;
+  // On crees on engine GameEngine  engine;
   // if (engine.initialize() == false)
   //   return (EXIT_FAILURE);
   // while (engine.update() == true)

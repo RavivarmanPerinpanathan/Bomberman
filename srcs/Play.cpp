@@ -34,9 +34,11 @@ std::vector<Player>	Play::getPlayers() const
 void			Play::setPlayers(std::string const &p1, std::string const &p2)
 {
   if (!p1.empty())
-    _players.push_back(Player(p1));
-  if (!p2.empty())
-    _players.push_back(Player(p2));
+    {
+      if (!p2.empty())
+	_players.push_back(Player(p2));
+      _players.push_back(Player(p1));
+    }
 }
 
 std::vector<Bot>	Play::getBots() const

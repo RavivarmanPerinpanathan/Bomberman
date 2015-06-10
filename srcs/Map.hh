@@ -39,7 +39,7 @@ public:
   std::map<std::pair<int, int>, status>	&getMap();
   void					setBox(int, int, status);
 
-  void					setPlayersMap(std::vector<Player>);
+  void					setPlayersMap(std::vector<Player>, std::vector<std::pair<int, int> >);
   void					setBotsMap(std::vector<Bot>);
   void					setRandomMap(std::vector<Player>, std::vector<Bot>);
   int				        checkIfCharacter(std::pair<int, int>, status);
