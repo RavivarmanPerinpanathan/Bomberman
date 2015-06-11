@@ -38,7 +38,8 @@ private:
   gdl::Geometry	_geometry;
   gdl::Model	_model;
   float		_speed;
-  // Pos3f		_pos;
+  gdl::Texture	_texture;
+// Pos3f		_pos;
   // Pos3f		_rotation;
 };
 

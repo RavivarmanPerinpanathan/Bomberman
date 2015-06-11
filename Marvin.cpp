@@ -27,6 +27,11 @@ bool	Marvin::initialize()
       std::cerr << "Cannot load marvin.fbx" << std::endl;
       return (false);
     }
+  if (_texture.load("./LibBomberman_linux_x64/assets/marvin.fbm/Main_texture_diffuse2.tga") == false)
+    {
+      std::cerr << "Cannot load the cube texture" << std::endl;
+      return (false);
+    }
   translate(glm::vec3(1, -0.1, 20));
   scale(glm::vec3(0.025, 0.025, 0.025));
   return (true);
