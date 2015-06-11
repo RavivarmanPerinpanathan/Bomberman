@@ -52,24 +52,26 @@ void			Play::setBots(int bots)
     _bots.push_back(Bot());
 }
 
-void			Play::eventHandler()
+int			Play::eventHandler()
 {
   /* gestion des events sur la page play */
 
   /* si on catch click souris sur le bouton "Play" */
   std::string	player1 = "Piwa"; /* récupère input nom p1 */
   std::string	player2 = "Wapi"; /* récupère input nom p2 */
-  int		botInput = 3; /* récupère input nb bots */
-  int		xMap = 20; /* récupère input x de la map */
-  int		yMap = 20; /* récupère input y de la map */
+  int		botInput = 15; /* récupère input nb bots */
+  int		xMap = 15; /* récupère input x de la map */
+  int		yMap = 15; /* récupère input y de la map */
 
   Map			map(xMap, yMap);
 
   setPlayers(player1, player2);
   setBots(botInput);
-  map.setRandomMap(getPlayers(), getBots());
+  if (map.setRandomMap(getPlayers(), getBots()) == 1)
+    return (1);
   map.showMap();
   /* --------------------------------------------- */
+  return (0);
 }
 
 void			Play::showPlay()

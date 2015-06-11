@@ -21,7 +21,7 @@ public:
   std::vector<Bot>	getBots() const;
   void			setBots(int);
 
-  void			eventHandler();
+  int			eventHandler();
   void			showPlay();
 
 protected:

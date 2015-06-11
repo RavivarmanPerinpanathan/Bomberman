@@ -37,17 +37,22 @@ public:
   int					getWidth() const;
   int					getHeight() const;
   std::map<std::pair<int, int>, status>	&getMap();
+  std::vector<std::pair<int, int> >	&getTmpMap();
   void					setBox(int, int, status);
 
-  void					setPlayersMap(std::vector<Player>, std::vector<std::pair<int, int> >);
+  void					createL(std::pair<int, int>);
+  void					popTmpMap(std::pair<int, int>);
+  void					setPlayersMap(std::vector<Player>);
   void					setBotsMap(std::vector<Bot>);
-  void					setRandomMap(std::vector<Player>, std::vector<Bot>);
+  void					setBlockMap(int, status);
+  int					setRandomMap(std::vector<Player>, std::vector<Bot>);
   int				        checkIfCharacter(std::pair<int, int>, status);
   void					showMap();
 
 private:
   int					_width;
   int					_height;
+  std::vector<std::pair<int, int> >	_tmpMap;
   std::map<std::pair<int, int>, status> _map;
 };
 
