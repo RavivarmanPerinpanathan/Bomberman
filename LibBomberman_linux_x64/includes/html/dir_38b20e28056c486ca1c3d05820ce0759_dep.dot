@@ -1,9 +1,0 @@
-digraph "glm/CMakeFiles/CompilerIdCXX" {
-  compound=true
-  node [ fontsize="10", fontname="FreeSans"];
-  edge [ labelfontsize="10", labelfontname="FreeSans"];
-  subgraph clusterdir_326403417f3d6e2e161a37bc18b8181f {
-    graph [ bgcolor="#ddddee", pencolor="black", label="CMakeFiles" fontname="FreeSans", fontsize="10", URL="dir_326403417f3d6e2e161a37bc18b8181f.html"]
-  dir_38b20e28056c486ca1c3d05820ce0759 [shape=box, label="CompilerIdCXX", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_38b20e28056c486ca1c3d05820ce0759.html"];
-  }
-}

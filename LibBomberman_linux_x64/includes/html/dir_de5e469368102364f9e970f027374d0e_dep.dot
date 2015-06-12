@@ -1,6 +1,0 @@
-digraph "GL" {
-  compound=true
-  node [ fontsize="10", fontname="FreeSans"];
-  edge [ labelfontsize="10", labelfontname="FreeSans"];
-  dir_de5e469368102364f9e970f027374d0e [shape=box, label="GL", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_de5e469368102364f9e970f027374d0e.html"];
-}
