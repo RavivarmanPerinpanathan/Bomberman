@@ -26,7 +26,7 @@ public:
   virtual void update(gdl::Clock const &clock, gdl::Input &input);
 
   // La fonction draw sert a dessiner l'objet
-  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock) = 0;
+  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y) = 0;
 
   void translate(glm::vec3 const &v);
 

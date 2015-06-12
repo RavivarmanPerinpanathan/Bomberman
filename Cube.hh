@@ -21,7 +21,8 @@ public:
   virtual ~Cube();
   virtual bool initialize();
   virtual void update(gdl::Clock const &clock, gdl::Input &input);
-  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock);
+  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y);
+  glm::mat4 getTransformation();
 };
 
 #endif	// CUBE

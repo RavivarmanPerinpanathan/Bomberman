@@ -1,11 +1,3 @@
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <BasicShader.hh>
-#include <Model.hh>
-#include <SdlContext.hh>
-#include "Attribute.hh"
-#include "Geometry.hh"
-#include "Texture.hh"
 #include "GameEngine.hh"
 #include <stdio.h>
 
@@ -30,19 +22,8 @@ bool GameEngine::initialize()
     }
       std::cout << "build success" << std::endl;
 
-    // On place ensuite la camera (sa projection ainsi que sa transformation)
-    glm::mat4 projection;
-    glm::mat4 transformation;
-    // La projection de la camera correspond a la maniere dont les objets vont etre dessine a l'ecran
-    projection = glm::perspective(80.0f, 800.0f / 600.0f, 0.1f, 100.0f*20);
-    // La transformation de la camera correspond a son orientation et sa position
-    // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
-    //lookAt(eye, lookedatpoint, donotuch)
-    transformation = glm::lookAt(glm::vec3(40*20, -25*20, 30*20), glm::vec3(40*20, 25*20, 0), glm::vec3(0, 1, 0));
     // On doit toujours binder le shader avant d'appeler les methodes setUniform
     _shader.bind();
-    _shader.setUniform("view", transformation);
-    _shader.setUniform("projection", projection);
 
     // On va ensuite creer un cube que l'on va ajouter a la liste d'objets
     // AObject *cube = new Cube();
@@ -54,15 +35,6 @@ bool GameEngine::initialize()
     // if (marvin->initialize() == false)
     //   return (false);
     // _objects.push_back(marvin);
-   // for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
-   //    {
-    /*	AObject *obj;
-	obj = _blockFactory.createInstance(Map::SOLID);
-	if (obj->initialize() == false)
-	  return false;
-	// obj->draw(_shader, _clock);
-	_objects.push_back(obj);
-	// }*/
     return true;
 }
 
@@ -84,7 +56,7 @@ void GameEngine::scale(glm::vec3 const& scale)
 glm::mat4 GameEngine::getTransformation()
 {
   glm::mat4 transform(1); // On cree une matrice identite
-  transform = glm::scale(transform, glm::vec3(20, 20, 0));
+  transform = glm::scale(transform, glm::vec3(20, 20, 1));
   // On applique ensuite les rotations selon les axes x, y et z
 
   return (transform);
@@ -98,6 +70,64 @@ bool GameEngine::update()
     // Mise a jour des inputs et de l'horloge de jeu
     _context.updateClock(_clock);
     _context.updateInputs(_input);
+
+    // On place ensuite la camera (sa projection ainsi que sa transformation)
+    glm::mat4 projection;
+    glm::mat4 transformation;
+    // La projection de la camera correspond a la maniere dont les objets vont etre dessine a l'ecran
+
+    // La transformation de la camera correspond a son orientation et sa position
+    // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
+    //lookAt(eye, lookedatpoint, donotuch)
+    static float baseY = -25.0f;
+    static float baseZ = 10.0f;
+    static float baseX = 40.0f;
+
+    if (_input.getKey(SDLK_KP_5)){
+      baseY = -25.0f;
+      baseZ = 10.0f;
+      baseX = 40.0f;
+    }
+
+    if (_input.getKey(SDLK_KP_2)){
+      baseY -= 2;
+      baseZ += 0.3f;
+    }
+
+    if (_input.getKey(SDLK_KP_ENTER)){
+      _map.setRandomMap();
+      _map.setBlockMap(5, Map::SOLID);
+    }
+
+    if (_input.getKey(SDLK_KP_PLUS)){
+      baseZ += 1;
+    }
+
+   if (_input.getKey(SDLK_KP_MINUS)){
+      baseZ -= 1;
+    }
+
+    if (_input.getKey(SDLK_KP_8)){
+      baseY += 2;
+      baseZ -= 0.3f;
+    }
+
+    if (_input.getKey(SDLK_KP_4)){
+      baseX -= 1;
+    }
+
+    if (_input.getKey(SDLK_KP_6)){
+      baseX += 1;
+    }
+
+    projection = glm::perspective(50.0f, 800.0f / 600.0f, 0.1f, 100.0f*20);
+
+    transformation = glm::lookAt(glm::vec3(baseX*20, baseY*20, baseZ*20), glm::vec3(baseX*20, 25*20, 0), glm::vec3(0, 1, 0));
+    //transformation = glm::lookAt(glm::vec3(40*20, -25*20, 30*20), glm::vec3(40*20, 25*20, 0), glm::vec3(0, 1, 0));
+    _shader.setUniform("view", transformation);
+    _shader.setUniform("projection", projection);
+
+
     // Mise a jour des differents objets
     for (size_t i = 0; i < _objects.size(); ++i)
       _objects[i]->update(_clock, _input);
@@ -106,7 +136,6 @@ bool GameEngine::update()
 
 void GameEngine::draw()
 {
-  std::cout << "whooo2" << std::endl;
     // On clear l'ecran
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // pour utiliser un shader (pour que ce soit ce dernier qui dessine la geometrie) il faut le binder.
@@ -133,6 +162,18 @@ void GameEngine::draw()
 
   _texture.bind();
   _geometry.draw(_shader, getTransformation(), GL_QUADS);
+
+  for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
+      {
+    	AObject *obj;
+	obj = _blockFactory.createInstance(it->second);
+	if (obj){
+	  obj->draw(_shader, _clock, (*it).first.second, (*it).first.first);
+	// _objects.push_back(obj);
+	  delete obj;
+	}
+      }
+
 
       /*
       (map)

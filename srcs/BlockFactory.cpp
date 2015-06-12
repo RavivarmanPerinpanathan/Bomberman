@@ -26,8 +26,8 @@ BlockFactory	&BlockFactory::operator=(BlockFactory const &c)
 
 AObject *BlockFactory::createInstance(Map::status status)
 {
-  if (status == 0)
-    return (new Solid());
+  if (status == Map::SOLID)
+    return (new Cube());
   return (NULL);
 }
 // void BlockFactory::init_map() {

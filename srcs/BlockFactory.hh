@@ -7,6 +7,7 @@
 #include "../AObject.hh"
 #include "../Cube.hh"
 #include "Ground.hh"
+#include "Solid.hh"
 #include "Map.hh"
 
 // template <class Object,class Key=string> class Factory
