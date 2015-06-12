@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <unistd.h>
 #include <vector>
 #include <map>
 #include "Player.hh"
@@ -21,39 +22,48 @@ public:
       SOLID,
       BREAK,
       BOMB,
-      SPEED,
-      RANGE,
-      SIMULT,
+      BONUS,
       P1,
       P2,
-      BOT
+      BOT,
+      DROP
     };
 
-  Map(int, int);
+  Map();
   ~Map();
   Map(Map const &);
   Map &operator=(Map const &);
 
   int					getWidth() const;
+  void					setWidth(int);
   int					getHeight() const;
+  void					setHeight(int);
+  std::vector<Player>			&getPlayers();
+  void					setPlayers(std::string const &, std::string const &);
+  std::vector<Bot>			&getBots();
+  void					setBots(int);
   std::map<std::pair<int, int>, status>	&getMap();
   std::vector<std::pair<int, int> >	&getTmpMap();
-  void					setBox(int, int, status);
 
+  void					setRandomMap();
+  void					setBox(std::pair<int, int>, status);
+  void					setTmpBox(std::pair<int, int>);
+  void					setPlayersMap();
+  void					setBotsMap();
+  void					setBlockMap(int, status);
   void					createL(std::pair<int, int>);
   void					popTmpMap(std::pair<int, int>);
-  void					setPlayersMap(std::vector<Player>);
-  void					setBotsMap(std::vector<Bot>);
-  void					setBlockMap(int, status);
-  int					setRandomMap(std::vector<Player>, std::vector<Bot>);
   int				        checkIfCharacter(std::pair<int, int>, status);
+  void					updateMap(int, std::pair<int, int>, std::pair<int, int>);
   void					showMap();
 
-private:
+protected:
   int					_width;
   int					_height;
-  std::vector<std::pair<int, int> >	_tmpMap;
   std::map<std::pair<int, int>, status> _map;
+  std::vector<Player>			_players;
+  std::vector<Bot>			_bots;
+  std::vector<std::pair<int, int> >	_tmpMap;
 };
 
 #endif /* !__MAP_HH__ */

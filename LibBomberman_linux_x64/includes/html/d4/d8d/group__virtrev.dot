@@ -1,0 +1,9 @@
+digraph "VIRTREV Extensions"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="GLM_VIRTREV_xstream\l: xml like output",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$da/df8/group__virtrev__xstream.html",tooltip="Streaming vector and matrix in a xml way. "];
+  Node0 [label="VIRTREV Extensions",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node0->Node1 [shape=plaintext, color="midnightblue", dir="back", style="solid"];
+}

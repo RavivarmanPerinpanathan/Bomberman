@@ -7,10 +7,13 @@ SRCS		=	main.cpp			\
 			Marvin.cpp			\
 			$(SRCS_DIR)/Bomb.cpp		\
 			$(SRCS_DIR)/Map.cpp		\
-			$(SRCS_DIR)/Play.cpp		\
 			$(SRCS_DIR)/Player.cpp		\
 			$(SRCS_DIR)/Bot.cpp		\
-			$(SRCS_DIR)/Game.cpp
+			$(SRCS_DIR)/Game.cpp		\
+			$(SRCS_DIR)/Menu.cpp		\
+			$(SRCS_DIR)/Timer.cpp		\
+			$(SRCS_DIR)/Solid.cpp		\
+			$(SRCS_DIR)/BlockFactory.cpp
 
 
 OBJS		=	$(SRCS:.cpp=.o)

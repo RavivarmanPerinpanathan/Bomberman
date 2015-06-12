@@ -10,21 +10,12 @@
 
 #include <cstdlib>
 #include "GameEngine.hh"
-#include "srcs/Play.hh"
+#include "srcs/Menu.hh"
 
 int	main()
 {
-  // GameEngine engine;
-  // On crees on engine GameEngine  engine;
-  // if (engine.initialize() == false)
-  //   return (EXIT_FAILURE);
-  // while (engine.update() == true)
-  //   engine.draw();
-  // return
-  //   EXIT_SUCCESS;
+  Menu	menu;
 
-  Play	play;
-
-  play.showPlay();
+  menu.showMenu();
   return (0);
 }

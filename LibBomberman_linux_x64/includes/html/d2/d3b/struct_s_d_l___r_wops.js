@@ -1,0 +1,27 @@
+var struct_s_d_l___r_wops =
+[
+    [ "append", "d2/d3b/struct_s_d_l___r_wops.html#a7b04f07407400c5247dd2073cc9ede50", null ],
+    [ "autoclose", "d2/d3b/struct_s_d_l___r_wops.html#a2131259969ed1f468e9930548841cd2b", null ],
+    [ "base", "d2/d3b/struct_s_d_l___r_wops.html#af9b489d7342296ce197b911cfa93b2ab", null ],
+    [ "buffer", "d2/d3b/struct_s_d_l___r_wops.html#abd174f28267c9ca6cac99eb76117763d", null ],
+    [ "close", "d2/d3b/struct_s_d_l___r_wops.html#a80672e229c5095e753670e0c81873923", null ],
+    [ "data", "d2/d3b/struct_s_d_l___r_wops.html#a86c2ea7a704b7e54902a8df925f3a3cd", null ],
+    [ "data1", "d2/d3b/struct_s_d_l___r_wops.html#ab89d27b4312c0b9d664c81bc92917fc8", null ],
+    [ "data2", "d2/d3b/struct_s_d_l___r_wops.html#aca073130e2e262eb11e86e1be993e215", null ],
+    [ "fp", "d2/d3b/struct_s_d_l___r_wops.html#a1fd8d69542725cd065f8be2398d287fe", null ],
+    [ "h", "d2/d3b/struct_s_d_l___r_wops.html#a95e1eef937981868784272b22921b50d", null ],
+    [ "here", "d2/d3b/struct_s_d_l___r_wops.html#a6fc84601c17e347c6ef24c63a79deb57", null ],
+    [ "hidden", "d2/d3b/struct_s_d_l___r_wops.html#a2eee4a1c4d5ace11e68034b22628becc", null ],
+    [ "left", "d2/d3b/struct_s_d_l___r_wops.html#a825d05c8d52e9a311ceb584573d2da8d", null ],
+    [ "mem", "d2/d3b/struct_s_d_l___r_wops.html#afa77d8519df40c6f8a3c9ecc37153ee4", null ],
+    [ "read", "d2/d3b/struct_s_d_l___r_wops.html#a36e58be1d3ed5dbb50af33587f498844", null ],
+    [ "seek", "d2/d3b/struct_s_d_l___r_wops.html#add91dc0e57df5d924a626aaf9049754f", null ],
+    [ "size", "d2/d3b/struct_s_d_l___r_wops.html#a2a92fb05f1a01ad330e51ef3b1c50876", null ],
+    [ "size", "d2/d3b/struct_s_d_l___r_wops.html#a237a45ef3345480ab8f60f61c11ed1a1", null ],
+    [ "stdio", "d2/d3b/struct_s_d_l___r_wops.html#a285ee4c5727242cbfaae2d0b6456fbf9", null ],
+    [ "stop", "d2/d3b/struct_s_d_l___r_wops.html#a4108a41afa8b62e75b0f160de4b56103", null ],
+    [ "type", "d2/d3b/struct_s_d_l___r_wops.html#a099017bfceaac24ced0e4d08a4e0a023", null ],
+    [ "unknown", "d2/d3b/struct_s_d_l___r_wops.html#abc4cf527300bb76867aeff531f20c171", null ],
+    [ "windowsio", "d2/d3b/struct_s_d_l___r_wops.html#a6e743b33b5f4fb08d339f7f2bc62e496", null ],
+    [ "write", "d2/d3b/struct_s_d_l___r_wops.html#a448ec3290bc5174a3b46538e742a46c4", null ]
+];

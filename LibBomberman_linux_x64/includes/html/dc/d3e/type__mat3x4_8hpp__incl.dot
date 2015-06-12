@@ -1,0 +1,12 @@
+digraph "glm/core/type_mat3x4.hpp"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="glm/core/type_mat3x4.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="type_mat.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d1/d70/type__mat_8hpp.html"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="type_gentype.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dd/d8e/type__gentype_8hpp.html"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="type_mat3x4.inl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$de/d87/type__mat3x4_8inl.html"];
+}

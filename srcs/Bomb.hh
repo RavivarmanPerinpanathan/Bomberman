@@ -7,10 +7,19 @@
 class Bomb
 {
 public:
-  Bomb();
+  Bomb(int, int, std::pair<int, int>);
   ~Bomb();
   Bomb(Bomb const &);
   Bomb &operator=(Bomb const &);
+
+  int			getRange() const;
+  int			getIdx() const;
+  std::pair<int, int>	getPos() const;
+
+protected:
+  int			_idx;
+  int			_range;
+  std::pair<int, int>	_pos;
 };
 
 #endif /* !__BOMB_HH__ */
