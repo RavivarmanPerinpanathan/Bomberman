@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 GameEngine::GameEngine(Map &map)
-  : _map(map)
+  : _map(map), _baseX(_map.getWidth()/2), _baseY((_map.getHeight()/2) - _map.getWidth()/2), _baseZ(_map.getHeight()/2 + _map.getWidth()/3), _size(20)
 {
 
 }
@@ -15,7 +15,7 @@ GameEngine::~GameEngine()
 
 bool GameEngine::initialize()
 {
-  if (!_context.start(800, 600, "My bomberman!"))
+  if (!_context.start(1600, 1000, "My bomberman!"))
     return false;
   glEnable(GL_DEPTH_TEST);
   if (!_shader.load("./LibBomberman_linux_x64/shaders/basic.fp", GL_FRAGMENT_SHADER)
@@ -29,17 +29,17 @@ bool GameEngine::initialize()
       return (false);
     }
   _geometry.pushVertex(glm::vec3(0, 0, 0));
-  _geometry.pushVertex(glm::vec3(80, 0, 0));
-  _geometry.pushVertex(glm::vec3(80, 50, 0));
-  _geometry.pushVertex(glm::vec3(0, 50, 0));
+  _geometry.pushVertex(glm::vec3(_map.getWidth(), 0, 0));
+  _geometry.pushVertex(glm::vec3(_map.getWidth(), _map.getHeight(), 0));
+  _geometry.pushVertex(glm::vec3(0, _map.getHeight(), 0));
   _geometry.pushUv(glm::vec2(0.0f, 0.0f));
   _geometry.pushUv(glm::vec2(0.0f, 1.0f));
   _geometry.pushUv(glm::vec2(1.0f, 1.0f));
   _geometry.pushUv(glm::vec2(1.0f, 0.0f));
   _geometry.build();
 
-  this->audio.setGameOverMusicVolume(80);
-  this->audio.playGameOverMusic();
+  audio.setGameOverMusicVolume(80);
+  audio.playGameOverMusic();
   return true;
 }
 
@@ -75,51 +75,31 @@ bool GameEngine::update()
     _context.updateClock(_clock);
     _context.updateInputs(_input);
 
-    // On place ensuite la camera (sa projection ainsi que sa transformation)
-    glm::mat4 projection;
-    glm::mat4 transformation;
-    // La projection de la camera correspond a la maniere dont les objets vont etre dessine a l'ecran
-
     // La transformation de la camera correspond a son orientation et sa position
     // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
     //lookAt(eye, lookedatpoint, donotuch)
-    static float baseY = -25.0f;
-    static float baseZ = 10.0f;
-    static float baseX = 40.0f;
 
     if (_input.getKey(SDLK_KP_5))
-      {
-	baseY = -25.0f;
-	baseZ = 10.0f;
-	baseX = 40.0f;
-      }
+      setView(40.0f, -25.0f, 10.0f);
     if (_input.getKey(SDLK_KP_2))
-      {
-	baseY -= 2;
-	baseZ += 0.3f;
-      }
+      setView(0, _baseY - 2, _baseZ + 0.3f);
     if (_input.getKey(SDLK_KP_ENTER))
       _map.setRandomMap();
     if (_input.getKey(SDLK_KP_PLUS))
-      baseZ += 1;
+      setView(0, 0, _baseZ + 1);
     if (_input.getKey(SDLK_KP_MINUS))
-      baseZ -= 1;
+      setView(0, 0, _baseZ - 1);
     if (_input.getKey(SDLK_KP_8))
-      {
-	baseY += 2;
-	baseZ -= 0.3f;
-      }
+      setView(0, _baseY + 2, _baseZ - 0.3f);
     if (_input.getKey(SDLK_KP_4))
-      baseX -= 1;
+      setView(_baseX - 1, 0, 0);
     if (_input.getKey(SDLK_KP_6))
-      baseX += 1;
+      setView(_baseX + 1, 0, 0);
 
-    projection = glm::perspective(50.0f, 800.0f / 600.0f, 0.1f, 100.0f*20);
-
-    transformation = glm::lookAt(glm::vec3(baseX*20, baseY*20, baseZ*20), glm::vec3(baseX*20, 25*20, 0), glm::vec3(0, 1, 0));
-    //transformation = glm::lookAt(glm::vec3(40*20, -25*20, 30*20), glm::vec3(40*20, 25*20, 0), glm::vec3(0, 1, 0));
-    _shader.setUniform("view", transformation);
-    _shader.setUniform("projection", projection);
+    _projection = glm::perspective(50.0f, 1600.0f / 800.0f, 0.1f, 100.0f*_size);
+    _transformation = glm::lookAt(glm::vec3(_baseX*_size, _baseY*_size, _baseZ*_size), glm::vec3(_baseX*_size, (_map.getHeight()/2)*_size, 0), glm::vec3(0, 1, 0));
+    _shader.setUniform("view", _transformation);
+    _shader.setUniform("projection", _projection);
 
     // Mise a jour des differents objets
     // for (size_t i = 0; i < _objects.size(); ++i)
@@ -144,6 +124,8 @@ void GameEngine::draw()
 	delete obj;
       }
     }
+  //  _shader.setUniform("");
+  //   _shader.bind();
   _context.flush();
 
   // for (size_t i = 0; i < _objects.size(); ++i)
@@ -170,4 +152,18 @@ glm::mat4 GameEngine::getTransformation()
   glm::mat4 transform(1);
   transform = glm::scale(transform, glm::vec3(20, 20, 1));
   return (transform);
+}
+
+void		GameEngine::setView(float x, float y, float z)
+{
+  if (x != 0)
+    _baseX = x;
+  if (y != 0)
+    _baseY = y;
+  if (z != 0)
+    _baseZ = z;
+  std::cout << "###########" << std::endl;
+  std::cout << "x = " << _baseX*_size << std::endl;
+  std::cout << "y = " <<_baseY*_size << std::endl;
+  std::cout << "z = " << _baseZ*_size << std::endl;
 }
