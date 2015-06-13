@@ -7,11 +7,6 @@
 #include <unistd.h>
 #include <vector>
 #include <map>
-#include "Player.hh"
-#include "Bot.hh"
-
-#define	VIEWPORT_X	20
-#define	VIEWPORT_Y	20
 
 class Map
 {
@@ -29,7 +24,7 @@ public:
       DROP
     };
 
-  Map();
+  Map(int, int, int, int);
   ~Map();
   Map(Map const &);
   Map &operator=(Map const &);
@@ -38,14 +33,14 @@ public:
   void					setWidth(int);
   int					getHeight() const;
   void					setHeight(int);
-  std::vector<Player>			&getPlayers();
-  void					setPlayers(std::string const &, std::string const &);
-  std::vector<Bot>			&getBots();
-  void					setBots(int);
+  int					getNbPlayers() const;
+  void					setNbPlayers(int);
+  int					getNbBots() const;
+  void					setNbBots(int);
   std::map<std::pair<int, int>, status>	&getMap();
   std::vector<std::pair<int, int> >	&getTmpMap();
 
-  void					setRandomMap();
+  int					setRandomMap();
   void					setBox(std::pair<int, int>, status);
   void					setTmpBox(std::pair<int, int>);
   void					setPlayersMap();
@@ -60,9 +55,9 @@ public:
 protected:
   int					_width;
   int					_height;
+  int					_nbPlayers;
+  int					_nbBots;
   std::map<std::pair<int, int>, status> _map;
-  std::vector<Player>			_players;
-  std::vector<Bot>			_bots;
   std::vector<std::pair<int, int> >	_tmpMap;
 };
 

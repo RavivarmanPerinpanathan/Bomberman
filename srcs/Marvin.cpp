@@ -8,7 +8,6 @@
 // Last update Fri Jun  5 14:44:44 2015 ravivarman perinpanathan
 //
 
-#include <Model.hh>
 #include "Marvin.hh"
 
 Marvin::Marvin()
@@ -54,7 +53,9 @@ void	Marvin::update(gdl::Clock const &clock, gdl::Input &input)
     translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
 }
 
-void	Marvin::draw(gdl::AShader &shader, gdl::Clock const &clock)
+void	Marvin::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 {
+  (void)x;
+  (void)y;
   _model.draw(shader, getTransformation(), clock.getElapsed());
 }

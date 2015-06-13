@@ -1,30 +1,26 @@
-SRCS_DIR	=	srcs
-
-SRCS		=	main.cpp			\
-			GameEngine.cpp			\
-			Cube.cpp			\
-			AObject.cpp			\
-			Marvin.cpp			\
-			$(SRCS_DIR)/Bomb.cpp		\
-			$(SRCS_DIR)/Solid.cpp		\
-			$(SRCS_DIR)/Map.cpp		\
-			$(SRCS_DIR)/Player.cpp		\
-			$(SRCS_DIR)/Bot.cpp		\
-			$(SRCS_DIR)/Game.cpp		\
-			$(SRCS_DIR)/Menu.cpp		\
-			$(SRCS_DIR)/Timer.cpp		\
-			$(SRCS_DIR)/BlockFactory.cpp
-
-
-OBJS		=	$(SRCS:.cpp=.o)
-
-NAME		=	bomberman
-
 CXX		=	g++
 
 RM		=	rm -f
 
-CXXFLAGS	+=	-ILibBomberman_linux_x64/includes/ -W -Wall -Wextra -Werror
+SRCS_DIR	=	srcs
+
+NAME		=	bomberman
+
+SRCS		=	$(SRCS_DIR)/AObject.cpp		\
+			$(SRCS_DIR)/GameEngine.cpp	\
+			$(SRCS_DIR)/BlockFactory.cpp	\
+			$(SRCS_DIR)/Menu.cpp		\
+			$(SRCS_DIR)/main.cpp		\
+			$(SRCS_DIR)/Marvin.cpp		\
+			$(SRCS_DIR)/Bomb.cpp		\
+			$(SRCS_DIR)/Solid.cpp		\
+			$(SRCS_DIR)/Bot.cpp		\
+			$(SRCS_DIR)/Player.cpp		\
+			$(SRCS_DIR)/Map.cpp
+
+OBJS		=	$(SRCS:.cpp=.o)
+
+CXXFLAGS	+=	-I include -ILibBomberman_linux_x64/includes/ -W -Wall -Wextra -Werror
 
 LDFLAGS		+=	-Wl,-rpath=LibBomberman_linux_x64/libs
 LDFLAGS		+=	-LLibBomberman_linux_x64/libs

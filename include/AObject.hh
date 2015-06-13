@@ -1,39 +1,31 @@
-#ifndef		AOBJECT
-# define	AOBJECT
-
+#ifndef __AOBJECT_HH__
+# define __AOBJECT_HH__
 
 #include <iostream>
-// Permet d'inclure la SDL 2
+#include <string>
 #include <SdlContext.hh>
-// Inclus la bibliotheque de mathematiques
-#include <glm/glm.hpp>
+#include <Game.hh>
+#include <Input.hh>
+#include <Clock.hh>
 #include <glm/gtc/matrix_transform.hpp>
 #include <BasicShader.hh>
-// La classe abstraite representant un objet avec sa position, sa rotation et son echelle
+#include <Model.hh>
+#include "Texture.hh"
+#include "Geometry.hh"
+#include "Attribute.hh"
 
 class AObject
 {
-
 public:
   AObject();
-  
   virtual ~AObject();
 
-  // La fonction initialize charge l'objet ou le construit
   virtual bool initialize();
-
-  // La fonction update sert a gerer le comportement de l'objet
   virtual void update(gdl::Clock const &clock, gdl::Input &input);
-
-  // La fonction draw sert a dessiner l'objet
   virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y) = 0;
-
   void translate(glm::vec3 const &v);
-
   void rotate(glm::vec3 const& axis, float angle);
-
   void scale(glm::vec3 const& scale);
-
   glm::mat4 getTransformation();
 
 protected:
@@ -42,4 +34,4 @@ protected:
   glm::vec3 _scale;
 };
 
-#endif		// AOBJECT
+#endif /* !__AOBJECT_HH__ */

@@ -1,12 +1,11 @@
 #ifndef __BLOCKFACTORY_HH__
 # define __BLOCKFACTORY_HH__
 
-#include <iostream>
-#include <string>
-#include <map>
-#include "../AObject.hh"
-#include "../Cube.hh"
-#include "Ground.hh"
+// // #include <iostream>
+// #include <string>
+// #include <map>
+// #include "Solid.hh"
+#include "AObject.hh"
 #include "Solid.hh"
 #include "Map.hh"
 

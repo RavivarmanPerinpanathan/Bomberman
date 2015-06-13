@@ -1,7 +1,8 @@
 #include <cstdio>
 #include "Map.hh"
 
-Map::Map()
+Map::Map(int width, int height, int nbPlayers, int nbBots)
+  : _width(width), _height(height), _nbPlayers(nbPlayers), _nbBots(nbBots)
 {
 
 }
@@ -12,7 +13,7 @@ Map::~Map()
 }
 
 Map::Map(Map const &c)
-  : _width(c._width), _height(c._height), _map(c._map), _players(c._players), _bots(c._bots)
+  : _width(c._width), _height(c._height), _nbPlayers(c._nbPlayers), _nbBots(c._nbBots), _map(c._map)
 {
 
 }
@@ -23,8 +24,8 @@ Map		&Map::operator=(Map const &c)
     {
       _width = c._width;
       _height = c._height;
-      _players = c._players;
-      _bots = c._bots;
+      _nbPlayers = c._nbPlayers;
+      _nbBots = c._nbBots;
       _map = c._map;
     }
   return (*this);
@@ -50,30 +51,24 @@ void		Map::setHeight(int height)
   _height = height;
 }
 
-std::vector<Player>				&Map::getPlayers()
+int		Map::getNbPlayers() const
 {
-  return (_players);
+  return (_nbPlayers);
 }
 
-void		Map::setPlayers(std::string const &p1, std::string const &p2)
+void		Map::setNbPlayers(int nbPlayers)
 {
-  if (!p1.empty())
-    {
-      if (!p2.empty())
-	_players.push_back(Player(p2));
-      _players.push_back(Player(p1));
-    }
+  _nbPlayers = nbPlayers;
 }
 
-std::vector<Bot>				&Map::getBots()
+int		Map::getNbBots() const
 {
-  return (_bots);
+  return (_nbBots);
 }
 
-void						Map::setBots(int bots)
+void		Map::setNbBots(int nbBots)
 {
-  for (int i = 0; i < bots; ++i)
-    _bots.push_back(Bot());
+  _nbBots = nbBots;
 }
 
 std::map<std::pair<int, int>, Map::status>	&Map::getMap()
@@ -96,8 +91,10 @@ void		Map::setTmpBox(std::pair<int, int> pos)
   getTmpMap().push_back(pos);
 }
 
-void		Map::setRandomMap()
+int		Map::setRandomMap()
 {
+  unsigned int	min = 0;
+
   for (int h = 0; h < getHeight(); ++h)
     {
       for (int w = 0; w < getWidth(); ++w)
@@ -112,6 +109,13 @@ void		Map::setRandomMap()
 	    }
   	}
     }
+  if (getTmpMap().size() < ((getNbPlayers() * min) + (getNbBots() * min)))
+    return (1);
+  setPlayersMap();
+  setBotsMap();
+  setBlockMap(5, Map::SOLID);
+  setBlockMap(10, Map::BREAK);
+  return (0);
 }
 
 void		Map::setPlayersMap()
@@ -125,9 +129,9 @@ void		Map::setPlayersMap()
   srand(time(NULL));
   cornerX = 1 + (-2 * (rand() % 2));
   cornerY = 1 + (-2 * (rand() % 2));
-  for (std::vector<Player>::iterator it = getPlayers().begin(); it != getPlayers().end(); ++it)
+  for (int i = 0; i < getNbPlayers(); ++i)
     {
-      if (getPlayers().begin() != it)
+      if (getNbPlayers() == 1)
 	{
 	  who = P2;
 	  cornerX = -1 * cornerX;
@@ -136,7 +140,6 @@ void		Map::setPlayersMap()
       p.second = (cornerX * (rand() % (getWidth()/10)+2)) + (((cornerX * -1)+1) * (getWidth()/2));
       p.first = (cornerY * (rand() % (getHeight()/10)+2)) + (((cornerY * -1)+1) * (getHeight()/2));
       setBox(std::make_pair(p.first, p.second), who);
-      it->setPos(p);
       popTmpMap(p);
       createL(p);
     }
@@ -147,13 +150,12 @@ void		Map::setBotsMap()
   std::pair<int, int>	p;
 
   srand(time(NULL));
-  for (std::vector<Bot>::iterator it = getBots().begin(); it != getBots().end(); ++it)
+  for (int i = 0; i < getNbBots(); ++i)
     {
       while (checkIfCharacter(p = getTmpMap()[rand() % getTmpMap().size()], P1) == 0
 	     || checkIfCharacter(p, P2) == 0 || checkIfCharacter(p, BOT) == 0)
 	;
       setBox(std::make_pair(p.first, p.second), BOT);
-      it->setPos(p);
       popTmpMap(p);
       createL(p);
     }
@@ -220,21 +222,24 @@ int		Map::checkIfCharacter(std::pair<int, int> pos, status character)
 
 void		Map::updateMap(int idx, std::pair<int, int> curPos, std::pair<int, int> newPos)
 {
-  newPos.first = curPos.first + newPos.first;
-  newPos.second = curPos.second + newPos.second;
-  if (getMap()[newPos] == EMPTY || getMap()[newPos] == BONUS)
-    {
-      if (idx == 3)
-	;
-      else
-	{
-	  usleep(getPlayers()[idx].getSpeed());
-	  getPlayers()[idx].setPos(newPos);
-	}
-      setBox(newPos, getMap()[curPos]);
-      setBox(curPos, EMPTY);
-    }
-  showMap();
+  (void)curPos;
+  (void)newPos;
+  (void)idx;
+  // newPos.first = curPos.first + newPos.first;
+  // newPos.second = curPos.second + newPos.second;
+  // if (getMap()[newPos] == EMPTY || getMap()[newPos] == BONUS)
+  //   {
+  //     if (idx == 3)
+  // 	;
+  //     else
+  // 	{
+  // 	  usleep(getPlayers()[idx].getSpeed());
+  // 	  getPlayers()[idx].setPos(newPos);
+  // 	}
+  //     setBox(newPos, getMap()[curPos]);
+  //     setBox(curPos, EMPTY);
+  //   }
+  // showMap();
 }
 
 void		Map::showMap()

@@ -9,8 +9,7 @@
 //
 
 #include <cstdlib>
-#include "GameEngine.hh"
-#include "srcs/Menu.hh"
+#include "Menu.hh"
 
 int	main()
 {

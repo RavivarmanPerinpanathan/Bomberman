@@ -1,8 +1,7 @@
 #ifndef __BOMB_HH_
 # define __BOMB_HH_
 
-#include <iostream>
-#include <string>
+#include "AObject.hh"
 
 class Bomb
 {

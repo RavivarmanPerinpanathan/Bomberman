@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Map.hh"
-#include "Game.hh"
+#include "GameEngine.hh"
 
 class Menu
 {
@@ -17,6 +17,7 @@ public:
 
   int			eventHandler();
   void			showMenu();
+  int			run(Map);
 };
 
 #endif /* !__MENU_HH__ */
