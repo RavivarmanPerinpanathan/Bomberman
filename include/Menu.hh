@@ -3,13 +3,15 @@
 
 #include <iostream>
 #include <string>
+#include "AObject.hh"
 #include <SdlContext.hh>
 #include <vector>
 #include "Map.hh"
 #include "GameEngine.hh"
 #include "Texture.hh"
+#include <Input.hh>
 
-class Menu
+class Menu : public AObject
 {
 public:
   Menu();
@@ -17,8 +19,9 @@ public:
   Menu(Menu const &);
   Menu	&operator=(Menu const &);
 
-  int			eventHandler();
+  int			eventHandler(gdl::Input &input);
   bool			showMenu();
+  bool			initilize();
   int			run(Map);
   std::vector<AObject*> _objects;
   gdl::BasicShader	_shader;

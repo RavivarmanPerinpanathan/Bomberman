@@ -25,23 +25,18 @@ Menu			&Menu::operator=(Menu const &c)
   return (*this);
 }
 
-int			Menu::eventHandler()
+int			Menu::eventHandler(gdl::Input &input)
 {
-  /* gestion des events sur la page play */
 
+  /* gestion des events sur la page play */
+  (void)input;
   /* si on catch click souris sur le bouton "Menu" */
   int		playerInput = 2;
-  //if ()
-  //player input = 2
+  // if (input.getKey(SDLK_LEFT))
+  //   playerInput = 2;
   int		botInput = 10; /* récupère input nb bots */
-<<<<<<< Updated upstream
   int		xMap = 30; /* récupère input x de la map */
   int		yMap = 20; /* récupère input y de la map */
-
-=======
-  int		xMap = 80; /* récupère input x de la map */
-  int		yMap = 50; /* récupère input y de la map */
->>>>>>> Stashed changes
   Map		map(xMap, yMap, playerInput, botInput);
 
   if (map.getWidth() < 10 || map.getHeight() < 10 || map.setRandomMap() == 1)
@@ -64,16 +59,23 @@ int			Menu::run(Map map)
   return (EXIT_SUCCESS);
 }
 
-bool			Menu::showMenu()
+bool			Menu::initilize()
 {
+  std::cout << "hello" << std::endl;
   if (!_context.start(800, 600, "Intro"))
     return false;
+  std::cout << "hello" << std::endl;
   glEnable(GL_DEPTH_TEST);
   if (!_shader.load("./LibBomberman_linux_x64/shaders/basic.fp", GL_FRAGMENT_SHADER)
 	 || !_shader.load("./LibBomberman_linux_x64/shaders/basic.vp", GL_VERTEX_SHADER)
 	 || !_shader.build())
     return false;
   _shader.bind();
+  return true;
+}
+
+bool			Menu::showMenu()
+{
   _speed = 20.0f;
   std::cout << "start intro" << std::endl;
   if (_texture.load("./img/Main.tga") == false)
@@ -104,3 +106,5 @@ bool			Menu::showMenu()
    * Quand tout est bon (la map crée avec les input) il faut faire un context.stop()
    */
 }
+
+
