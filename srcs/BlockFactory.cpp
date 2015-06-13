@@ -30,7 +30,7 @@ AObject *BlockFactory::createInstance(Map::status status)
     return (new Solid());
   if (status == Map::BREAK)
     return (new Break());
-  if (status == Map::P1 || status == Map::P2)
+  if (status == Map::P1) // || status == Map::P2
     return (new Player());
   return (NULL);
 }

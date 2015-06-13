@@ -5,6 +5,7 @@
 #include <string>
 #include <unistd.h>
 #include "AObject.hh"
+#include "Model.hh"
 
 class Player : public AObject
 {
@@ -32,8 +33,10 @@ public:
 protected:
   gdl::Texture	_texture;
   gdl::Geometry	_geometry;
+  gdl::Model	_model;
   std::string		_name;
-  useconds_t		_speed;
+  float			_speed;
+  //useconds_t		_speed;
   int			_range;
   int			_simult;
   std::pair<int, int>	_pos;

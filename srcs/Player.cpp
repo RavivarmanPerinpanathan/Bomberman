@@ -70,21 +70,38 @@ void			Player::setPos(std::pair<int, int> pos)
 
 bool	Player::initialize()
 {
+  _speed = 20.0f;
+  if (_model.load("./../LibBomberman_linux_x64/assets/marvin.fbx") == false)
+    {
+      std::cerr << "Cannot load marvin.fbx" << std::endl;
+      return (false);
+    }
+  translate(glm::vec3(1, -0.1, 20));
+  scale(glm::vec3(0.025, 0.025, 0.025));
   return (true);
 }
 
 void	Player::update(gdl::Clock const &clock, gdl::Input &input)
 {
-  (void)clock;
-  (void)input;
+ if (input.getKey(SDLK_UP))
+    translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_DOWN))
+    translate(glm::vec3(0, 0, 1) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_LEFT))
+    translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_RIGHT))
+    translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+  // (void)clock;
+  // (void)input;
 }
 
 void Player::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 {
-  (void)clock;
-  (void)shader;
+  // (void)clock;
+  //  (void)shader;
   (void)x;
   (void)y;
+  _model.draw(shader, getTransformation(), clock.getElapsed());
 }
 
 glm::mat4 Player::getTransformation()
