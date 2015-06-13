@@ -17,7 +17,7 @@ bool	Solid::initialize()
       std::cerr << "Cannot load the ground texture" << std::endl;
       return (false);
     }
- 
+
   _geometry.setColor(glm::vec4(0.9f, 0.9f, 0.9f, 1));
   _geometry.pushVertex(glm::vec3(0, 0, 0));
   _geometry.pushVertex(glm::vec3(1, 0, 0));
@@ -71,7 +71,7 @@ void	Solid::update(gdl::Clock const &clock, gdl::Input &input)
 void Solid::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 {
    (void)clock;
-   _position = glm::vec3(x, y, 0);
+  _position = glm::vec3(x, y, 0);
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);
 }

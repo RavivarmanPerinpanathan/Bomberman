@@ -29,7 +29,7 @@ private:
   gdl::Clock _clock;
   gdl::Input _input;
   gdl::BasicShader _shader;
-  std::vector<AObject*> _objects;
+  std::map<Map::status, AObject*> _objects;
   gdl::Texture	_texture;
   gdl::Geometry	_geometry;
   glm::vec3 _position;

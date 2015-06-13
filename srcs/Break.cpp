@@ -71,6 +71,7 @@ void	Break::update(gdl::Clock const &clock, gdl::Input &input)
 void Break::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 {
   (void)clock;
+  (void)clock;
   _position = glm::vec3(x, y, 0);
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);
