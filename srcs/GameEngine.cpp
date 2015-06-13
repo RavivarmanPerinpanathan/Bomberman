@@ -117,9 +117,9 @@ void GameEngine::draw()
       AObject *obj;
       obj = _blockFactory.createInstance(it->second);
       if (obj){
-	if (obj->initialize((*it).first.second, (*it).first.first) == false)
+	if (obj->initialize() == false)
 	  return ;
-	obj->draw(_shader, _clock);
+	obj->draw(_shader, _clock, (*it).first.second, (*it).first.first);
   	// _objects.push_back(obj);
 	delete obj;
       }

@@ -20,9 +20,9 @@ public:
   AObject();
   virtual ~AObject();
 
-  virtual bool initialize(int, int) = 0;
+  virtual bool initialize() = 0;
   virtual void update(gdl::Clock const &, gdl::Input &) = 0;
-  virtual void draw(gdl::AShader &, gdl::Clock const &) = 0;
+  virtual void draw(gdl::AShader &, gdl::Clock const &, int, int) = 0;
   void translate(glm::vec3 const &);
   void rotate(glm::vec3 const&, float);
   void scale(glm::vec3 const&);

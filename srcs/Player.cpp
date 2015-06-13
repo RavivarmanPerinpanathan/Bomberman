@@ -17,6 +17,23 @@ Player::Player(Player const &c)
 
 }
 
+bool	Player::initialize()
+{
+  return (true);
+}
+
+void	Player::update()
+{}
+
+void	Player::draw()
+{}
+
+glm::mat4	Player::getTransformation()
+{
+  glm::mat4	transform(1);
+  return (transform);
+}
+
 Player		 &Player::operator=(Player const &c)
 {
   if (this != &c)

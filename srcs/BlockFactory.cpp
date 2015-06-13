@@ -28,8 +28,8 @@ AObject *BlockFactory::createInstance(Map::status status)
 {
   if (status == Map::SOLID)
     return (new Solid());
-  if (status == Map::BREAK)
-    return (new Break());
+  /*if (status == Map::BREAK)
+    return (new Break());*/
   return (NULL);
 }
 // void BlockFactory::init_map() {

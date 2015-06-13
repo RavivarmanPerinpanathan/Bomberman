@@ -17,6 +17,9 @@ SRCS		=	$(SRCS_DIR)/AObject.cpp		\
 			$(SRCS_DIR)/Bot.cpp		\
 			$(SRCS_DIR)/Player.cpp		\
 			$(SRCS_DIR)/Audio.cpp		\
+			$(SRCS_DIR)/Range.cpp		\
+			$(SRCS_DIR)/Speed.cpp		\
+			$(SRCS_DIR)/Simult.cpp		\
 			$(SRCS_DIR)/Map.cpp
 
 OBJS		=	$(SRCS:.cpp=.o)

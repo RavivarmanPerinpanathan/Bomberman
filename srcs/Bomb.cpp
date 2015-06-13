@@ -43,3 +43,19 @@ std::pair<int, int>	Bomb::getPos() const
   return (_pos);
 }
 
+bool	Bomb::initialize()
+{
+  return (true);
+}
+
+void	Bomb::update()
+{}
+
+void	Bomb::draw()
+{}
+
+glm::mat4	Bomb::getTransformation()
+{
+  glm::mat4	transform(1);
+  return (transform);
+}

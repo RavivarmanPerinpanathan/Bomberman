@@ -38,3 +38,20 @@ void			Bot::setPos(std::pair<int, int> pos)
 {
   _pos = pos;
 }
+
+bool	Bot::initialize()
+{
+  return (true);
+}
+
+void	Bot::update()
+{}
+
+void	Bot::draw()
+{}
+
+glm::mat4	Bot::getTransformation()
+{
+  glm::mat4	transform(1);
+  return (transform);
+}

@@ -4,14 +4,16 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include "AObject.hh"
 
-class Player
+class Player : public AObject
 {
 public:
   Player(std::string const &);
   ~Player();
   Player(Player const &);
   Player		&operator=(Player const &);
+  
 
   std::string		getName() const;
   useconds_t		getSpeed() const;
@@ -22,6 +24,15 @@ public:
   void			setSimult(int);
   std::pair<int, int>	getPos() const;
   void			setPos(std::pair<int, int>);
+
+  virtual bool		initialize();
+  virtual void		update();
+  virtual void		draw();
+  glm::mat4		getTransformation();
+
+private:
+  gdl::Texture	_texture;
+  gdl::Geometry	_geometry;
 
 protected:
   std::string		_name;

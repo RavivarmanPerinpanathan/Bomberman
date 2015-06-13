@@ -3,7 +3,7 @@
 
 #include <SFML/Audio.hpp>
 
-class Audio
+class Audio 
 {
 public:
   Audio();
