@@ -18,6 +18,7 @@ public:
   int			eventHandler();
   void			showMenu();
   int			run(Map);
+  std::vector<AObject*> _objects;
 };
 
 #endif /* !__MENU_HH__ */
