@@ -13,6 +13,7 @@ SRCS		=	$(SRCS_DIR)/AObject.cpp		\
 			$(SRCS_DIR)/main.cpp		\
 			$(SRCS_DIR)/Bomb.cpp		\
 			$(SRCS_DIR)/Solid.cpp		\
+			$(SRCS_DIR)/Break.cpp		\
 			$(SRCS_DIR)/Bot.cpp		\
 			$(SRCS_DIR)/Player.cpp		\
 			$(SRCS_DIR)/Audio.cpp		\
