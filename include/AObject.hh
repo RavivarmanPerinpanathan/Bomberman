@@ -20,12 +20,12 @@ public:
   AObject();
   virtual ~AObject();
 
-  virtual bool initialize();
-  virtual void update(gdl::Clock const &clock, gdl::Input &input);
-  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y) = 0;
-  void translate(glm::vec3 const &v);
-  void rotate(glm::vec3 const& axis, float angle);
-  void scale(glm::vec3 const& scale);
+  virtual bool initialize(int, int) = 0;
+  virtual void update(gdl::Clock const &, gdl::Input &) = 0;
+  virtual void draw(gdl::AShader &, gdl::Clock const &) = 0;
+  void translate(glm::vec3 const &);
+  void rotate(glm::vec3 const&, float);
+  void scale(glm::vec3 const&);
   glm::mat4 getTransformation();
 
 protected:

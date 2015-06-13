@@ -17,11 +17,12 @@ public:
       SOLID,
       BREAK,
       BOMB,
-      BONUS,
+      SPEED,
+      RANGE,
+      SIMULT,
       P1,
       P2,
-      BOT,
-      DROP
+      BOT
     };
 
   Map(int, int, int, int);

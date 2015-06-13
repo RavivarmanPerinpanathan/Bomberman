@@ -11,7 +11,6 @@ SRCS		=	$(SRCS_DIR)/AObject.cpp		\
 			$(SRCS_DIR)/BlockFactory.cpp	\
 			$(SRCS_DIR)/Menu.cpp		\
 			$(SRCS_DIR)/main.cpp		\
-			$(SRCS_DIR)/Marvin.cpp		\
 			$(SRCS_DIR)/Bomb.cpp		\
 			$(SRCS_DIR)/Solid.cpp		\
 			$(SRCS_DIR)/Bot.cpp		\

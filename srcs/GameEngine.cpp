@@ -118,7 +118,6 @@ bool GameEngine::update()
     _shader.setUniform("view", transformation);
     _shader.setUniform("projection", projection);
 
-
     // Mise a jour des differents objets
     // for (size_t i = 0; i < _objects.size(); ++i)
     //   _objects[i]->update(_clock, _input);
@@ -135,7 +134,9 @@ void GameEngine::draw()
       AObject *obj;
       obj = _blockFactory.createInstance(it->second);
       if (obj){
-	obj->draw(_shader, _clock, (*it).first.second, (*it).first.first);
+	if (obj->initialize((*it).first.second, (*it).first.first) == false)
+	  return ;
+	obj->draw(_shader, _clock);
   	// _objects.push_back(obj);
 	delete obj;
       }

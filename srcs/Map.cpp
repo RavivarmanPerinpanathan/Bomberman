@@ -254,14 +254,16 @@ void		Map::showMap()
 	printf("\33[31m");
       else if(it->second == BOMB)
 	printf("\33[35m");
-      else if(it->second == BONUS)
+      else if(it->second == SPEED)
+	printf("\33[32m");
+      else if(it->second == SIMULT)
+	printf("\33[32m");
+      else if(it->second == RANGE)
 	printf("\33[32m");
       else if(it->second == SOLID)
 	printf("\33[30m");
       else if(it->second == BREAK)
 	printf("\33[33m");
-      else if(it->second == DROP)
-	printf("\33[37m");
       std::cout << it->second;
       if (it->first.second == getWidth() - 1)
 	std::cout << std::endl;
