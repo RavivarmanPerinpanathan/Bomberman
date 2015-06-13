@@ -34,8 +34,8 @@ int			Menu::eventHandler()
   // if ......
   // player input = 2
   int		botInput = 10; /* récupère input nb bots */
-  int		xMap = 80; /* récupère input x de la map */
-  int		yMap = 50; /* récupère input y de la map */
+  int		xMap = 30; /* récupère input x de la map */
+  int		yMap = 20; /* récupère input y de la map */
 
   Map		map(xMap, yMap, playerInput, botInput);
 
