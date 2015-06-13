@@ -1,7 +1,6 @@
 #include "Player.hh"
 
-Player::Player(std::string const &name)
-  : _name(name), _speed(300000), _range(2), _simult(1)
+Player::Player()
 {
 
 }
@@ -12,37 +11,14 @@ Player::~Player()
 }
 
 Player::Player(Player const &c)
-  : _name(c._name), _speed(c._speed), _range(c._range), _simult(c._simult), _pos(c._pos)
 {
-
-}
-
-bool	Player::initialize()
-{
-  return (true);
-}
-
-void	Player::update()
-{}
-
-void	Player::draw()
-{}
-
-glm::mat4	Player::getTransformation()
-{
-  glm::mat4	transform(1);
-  return (transform);
+  (void)c;
 }
 
 Player		 &Player::operator=(Player const &c)
 {
   if (this != &c)
     {
-      _name = c._name;
-      _speed = c._speed;
-      _range = c._range;
-      _simult = c._simult;
-      _pos = c._pos;
     }
   return (*this);
 }
@@ -90,4 +66,30 @@ std::pair<int, int>	Player::getPos() const
 void			Player::setPos(std::pair<int, int> pos)
 {
   _pos = pos;
+}
+
+bool	Player::initialize()
+{
+  return (true);
+}
+
+void	Player::update(gdl::Clock const &clock, gdl::Input &input)
+{
+  (void)clock;
+  (void)input;
+}
+
+void Player::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
+{
+  (void)clock;
+  (void)shader;
+  (void)x;
+  (void)y;
+}
+
+glm::mat4 Player::getTransformation()
+{
+  glm::mat4 transform(1);
+
+  return (transform);
 }

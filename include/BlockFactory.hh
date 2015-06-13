@@ -8,6 +8,7 @@
 #include "AObject.hh"
 #include "Solid.hh"
 #include "Break.hh"
+#include "Player.hh"
 #include "Map.hh"
 
 // template <class Object,class Key=string> class Factory

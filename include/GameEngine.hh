@@ -39,6 +39,7 @@ private:
   glm::mat4 _transformation;
   Map			_map;
    BlockFactory		_blockFactory;
+  std::vector<AObject*>	_players;
   Audio audio;
   float	_baseX;
   float _baseY;

@@ -9,11 +9,10 @@
 class Player : public AObject
 {
 public:
-  Player(std::string const &);
+  Player();
   ~Player();
   Player(Player const &);
   Player		&operator=(Player const &);
-  
 
   std::string		getName() const;
   useconds_t		getSpeed() const;
@@ -25,16 +24,14 @@ public:
   std::pair<int, int>	getPos() const;
   void			setPos(std::pair<int, int>);
 
-  virtual bool		initialize();
-  virtual void		update();
-  virtual void		draw();
+  virtual bool initialize();
+  virtual void update(gdl::Clock const &clock, gdl::Input &input);
+  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int, int);
   glm::mat4		getTransformation();
 
-private:
+protected:
   gdl::Texture	_texture;
   gdl::Geometry	_geometry;
-
-protected:
   std::string		_name;
   useconds_t		_speed;
   int			_range;

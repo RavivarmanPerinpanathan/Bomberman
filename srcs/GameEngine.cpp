@@ -45,8 +45,8 @@ bool GameEngine::initialize()
       	return false;
     }
 
-  // for (int i = 7; i < 7 + 2; ++i)
-  //   _players.push_back(_blockFactory.createInstance(static_cast<Map::status>(i)));
+  for (int i = 7; i < 7 + 2; ++i)
+    _players.push_back(_blockFactory.createInstance(static_cast<Map::status>(i)));
 
   audio.setGameOverMusicVolume(80);
   audio.playGameOverMusic();

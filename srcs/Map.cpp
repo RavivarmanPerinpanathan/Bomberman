@@ -93,8 +93,7 @@ void		Map::setTmpBox(std::pair<int, int> pos)
 
 int		Map::setRandomMap()
 {
-  unsigned int	min = 0;
-
+  unsigned int	min = 5;
   for (int h = 0; h < getHeight(); ++h)
     {
       for (int w = 0; w < getWidth(); ++w)
@@ -115,6 +114,7 @@ int		Map::setRandomMap()
   setBotsMap();
   setBlockMap(5, Map::SOLID);
   setBlockMap(10, Map::BREAK);
+  std::cout << _nbPlayers << std::endl;
   return (0);
 }
 
@@ -131,7 +131,7 @@ void		Map::setPlayersMap()
   cornerY = 1 + (-2 * (rand() % 2));
   for (int i = 0; i < getNbPlayers(); ++i)
     {
-      if (getNbPlayers() == 1)
+      if (i == 1)
 	{
 	  who = P2;
 	  cornerX = -1 * cornerX;
