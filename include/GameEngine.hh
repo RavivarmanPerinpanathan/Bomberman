@@ -3,6 +3,7 @@
 
 #pragma once
 // #include <glm/glm.hpp>
+#include <vector>
 #include "AObject.hh"
 #include "BlockFactory.hh"
 #include "Map.hh"
@@ -30,6 +31,8 @@ private:
   gdl::Input _input;
   gdl::BasicShader _shader;
   std::map<Map::status, AObject*> _objects;
+  std::vector<AObject*>	_players;
+
   gdl::Texture	_texture;
   gdl::Geometry	_geometry;
   glm::vec3 _position;
@@ -37,9 +40,9 @@ private:
   glm::vec3 _scale;
   glm::mat4 _projection;
   glm::mat4 _transformation;
+
   Map			_map;
-   BlockFactory		_blockFactory;
-  std::vector<AObject*>	_players;
+  BlockFactory		_blockFactory;
   Audio audio;
   float	_baseX;
   float _baseY;

@@ -220,30 +220,9 @@ int		Map::checkIfCharacter(std::pair<int, int> pos, status character)
   return (1);
 }
 
-void		Map::updateMap(int idx, std::pair<int, int> curPos, std::pair<int, int> newPos)
-{
-  (void)curPos;
-  (void)newPos;
-  (void)idx;
-  // newPos.first = curPos.first + newPos.first;
-  // newPos.second = curPos.second + newPos.second;
-  // if (getMap()[newPos] == EMPTY || getMap()[newPos] == BONUS)
-  //   {
-  //     if (idx == 3)
-  // 	;
-  //     else
-  // 	{
-  // 	  usleep(getPlayers()[idx].getSpeed());
-  // 	  getPlayers()[idx].setPos(newPos);
-  // 	}
-  //     setBox(newPos, getMap()[curPos]);
-  //     setBox(curPos, EMPTY);
-  //   }
-  // showMap();
-}
-
 void		Map::showMap()
 {
+  std::cout << "in map" << std::endl;
   for (std::map<std::pair<int, int>, status>::iterator it = getMap().begin(); it != getMap().end(); ++it)
     {
       if (it->second == P1)

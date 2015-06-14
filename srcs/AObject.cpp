@@ -1,15 +1,58 @@
 #include "AObject.hh"
 
-AObject::AObject() :
-  _position(0, 0, 0), // On initialise la position a 0
-  _rotation(0, 0, 0), // pareil pour la rotation
-  _scale(20, 20, 1) // l'echelle est mise a 1
+AObject::AObject()
+  : _position(0, 0, 0), _rotation(0, 0, 0), _scale(20, 20, 1)
 {
+
 }
 
 AObject::~AObject()
 {
 
+}
+
+int			AObject::getId() const
+{
+  return (_id);
+}
+
+void			AObject::setId(int id)
+{
+  _id = id;
+}
+
+std::pair<int, int>	AObject::getPos() const
+{
+  return (_pos);
+}
+
+void			AObject::setPos(std::pair<int, int> pos)
+{
+  _pos = pos;
+}
+
+Map			*AObject::getMap()
+{
+  return (_map);
+}
+
+void			AObject::setMap(Map *map)
+{
+  _map = map;
+}
+
+void		AObject::updateMap(std::pair<int, int> curPos, std::pair<int, int> newPos)
+{
+  // std::cout << "MOVE" << std::endl;
+  newPos.first = curPos.first + newPos.first;
+  newPos.second = curPos.second + newPos.second;
+  if (getMap()->getMap()[newPos] == Map::EMPTY || getMap()->getMap()[newPos] == Map::RANGE
+      || getMap()->getMap()[newPos] == Map::SIMULT || getMap()->getMap()[newPos] == Map::SPEED)
+    {
+      setPos(newPos);
+      getMap()->setBox(newPos, getMap()->getMap()[curPos]);
+      getMap()->setBox(curPos, Map::EMPTY);
+    }
 }
 
 void AObject::translate(glm::vec3 const &v)

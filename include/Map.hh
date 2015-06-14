@@ -50,7 +50,6 @@ public:
   void					createL(std::pair<int, int>);
   void					popTmpMap(std::pair<int, int>);
   int				        checkIfCharacter(std::pair<int, int>, status);
-  void					updateMap(int, std::pair<int, int>, std::pair<int, int>);
   void					showMap();
 
 protected:

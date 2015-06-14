@@ -10,7 +10,7 @@ GameEngine::GameEngine(Map &map)
 GameEngine::~GameEngine()
 {
   // for (std::map<Map::status, AObject *>::iterator it = _objects.begin(); it != _objects.end(); ++it)
-  //   delete it;
+  //   delete it->second;
 }
 
 bool GameEngine::initialize()
@@ -45,8 +45,37 @@ bool GameEngine::initialize()
       	return false;
     }
 
-  for (int i = 7; i < 7 + 2; ++i)
-    _players.push_back(_blockFactory.createInstance(static_cast<Map::status>(i)));
+  for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
+    {
+      if ((*it).second == Map::P1 || (*it).second == Map::P2)
+      	{
+  	  AObject *player;
+
+  	  player = _blockFactory.createInstance((*it).second);
+  	  if (player->initialize() == false)
+  	    return false;
+      	  player->setMap(&_map);
+      	  player->setPos((*it).first);
+      	  player->setId((*it).second - 7);
+  	  _players.push_back(player);
+  	}
+    }
+  std::cout << "ok" << std::endl;
+  // AObject *player = new Solid();
+  // if (player->initialize() == false)
+  //   return (false);
+  // _players.push_back(player);
+  // std::cout << "ici" << std::endl;
+  // for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
+  //   {
+  //     std::cout << "in" << std::endl;
+  //     (*it)->getMap()->showMap();
+  //     std::cout << (*it)->getId() << std::endl;
+  //     std::cout << (*it)->getPos().first << (*it)->getPos().second << std::endl;
+  //     //(*it)->update(_clock, _input);
+  //     (*it)->draw(_shader, _clock, (*it)->getPos().first, (*it)->getPos().second);
+  //     std::cout << "out" << std::endl;
+  //   }
 
   audio.setGameOverMusicVolume(80);
   audio.playGameOverMusic();
@@ -60,40 +89,11 @@ bool GameEngine::initialize()
 
 bool GameEngine::update()
 {
-  // if (input.getKey(SDLK_ESCAPE) || input.getInput(SDL_QUIT))
-  //   return false;
-  // if (input.getKey(SDLK_UP))
-  //   _map.updateMap(0, _map.getPlayers()[0].getPos(), std::make_pair(-1, 0));
-  // if (input.getKey(SDLK_DOWN))
-  //   _map.updateMap(0, _map.getPlayers()[0].getPos(), std::make_pair(1, 0));
-  // if (input.getKey(SDLK_LEFT))
-  //   _map.updateMap(0, _map.getPlayers()[0].getPos(), std::make_pair(0, -1));
-  // if (input.getKey(SDLK_RIGHT))
-  //   _map.updateMap(0, _map.getPlayers()[0].getPos(), std::make_pair(0, 1));
-  // if (input.getKey(SDLK_RSHIFT))
-  //   dropBomb(0);
-  // if (input.getKey(SDLK_z))
-  //   _map.updateMap(1, _map.getPlayers()[1].getPos(), std::make_pair(-1, 0));
-  // if (input.getKey(SDLK_s))
-  //   _map.updateMap(1, _map.getPlayers()[1].getPos(), std::make_pair(1, 0));
-  // if (input.getKey(SDLK_q))
-  //   _map.updateMap(1, _map.getPlayers()[1].getPos(), std::make_pair(0, -1));
-  // if (input.getKey(SDLK_d))
-  //   _map.updateMap(1, _map.getPlayers()[1].getPos(), std::make_pair(0, 1));
-  // if (input.getKey(SDLK_SPACE))
-  //   dropBomb(1);
-
-  // Si la touche ECHAP est appuyee ou si l'utilisateur ferme la fenetre, on quitte le programme
-  if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
-    return false;
-  // Mise a jour des inputs et de l'horloge de jeu
   _context.updateClock(_clock);
   _context.updateInputs(_input);
 
-  // La transformation de la camera correspond a son orientation et sa position
-  // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
-  //lookAt(eye, lookedatpoint, donotuch)
-
+  if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
+    return false;
   if (_input.getKey(SDLK_KP_5))
     setView(40.0f, -25.0f, 10.0f);
   if (_input.getKey(SDLK_KP_2))
@@ -111,12 +111,40 @@ bool GameEngine::update()
   if (_input.getKey(SDLK_KP_6))
     setView(_baseX + 1, 0, 0);
 
+  // La transformation de la camera correspond a son orientation et sa position
+  // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
+  //lookAt(eye, lookedatpoint, donotuch)
   _transformation = glm::lookAt(glm::vec3(_baseX*_size, _baseY*_size, _baseZ*_size), glm::vec3(_baseX*_size, (_map.getHeight()/2)*_size, 0), glm::vec3(0, 1, 0));
   _shader.setUniform("view", _transformation);
   _shader.setUniform("projection", _projection);
 
   // for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-  //   it->update(_clock, _input);
+  //   {
+  //     std::cout << "infinity" << std::endl;
+  //     if ((*it)->getId() == 1)
+  // 	std::cout << "first" << std::endl;
+  //     if ((*it)->getId() == 1 && _input.getKey(SDLK_UP))
+  // 	(*it)->updateMap((*it)->getPos(), std::make_pair(-1, 0));
+  //   }
+
+  // for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
+  //   {
+  //     if (_objects[it->second])
+  //     	_objects[it->second]->update(_clock, _input);
+      // if (it->second == Map::P1)
+      // 	{
+      // 	  std::cout << "in" << std::endl;
+      // 	  _players[0]->draw(_shader, _clock,  it->first.second, it->first.first);
+      // 	}
+      // if (it->second == Map::P2)
+      // 	{
+      // 	  std::cout << "in" << std::endl;
+      // 	  _players[1]->draw(_shader, _clock,  it->first.second, it->first.first);
+      // 	}
+    // }
+  // std::cout << "ici" << std::endl;
+  for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
+    (*it)->update(_clock, _input);
   // for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
   //   it->update(_clock, _input);
   return true;
@@ -127,14 +155,30 @@ void GameEngine::draw()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _texture.bind();
   _geometry.draw(_shader, getTransformation(), GL_QUADS);
-  //  _shader.setUniform("");
-  //   _shader.bind();
+  _shader.bind();
   for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
-    if (_objects[it->second])
-      _objects[it->second]->draw(_shader, _clock, it->first.second, it->first.first);
-
-  // for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-  //   it->draw(_shader, _clock, it->getPos());
+    {
+      if (_objects[it->second])
+      	_objects[it->second]->draw(_shader, _clock, it->first.second, it->first.first);
+      // if (it->second == Map::P1)
+      // 	{
+      // 	  std::cout << "in" << std::endl;
+      // 	  _players[0]->draw(_shader, _clock,  it->first.second, it->first.first);
+      // 	}
+      // if (it->second == Map::P2)
+      // 	{
+      // 	  std::cout << "in" << std::endl;
+      // 	  _players[1]->draw(_shader, _clock,  it->first.second, it->first.first);
+      // 	}
+    }
+  // std::cout << "here" << std::endl;
+  // for (size_t i = 0; i < _players.size(); ++i)
+  //   {
+  //     std::cout << "in for" << std::endl;
+  //     _players[i]->draw(_shader, _clock, 20, 20);
+  //   }
+  for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
+    (*it)->draw(_shader, _clock, (*it)->getPos().second, (*it)->getPos().first);
   // for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
   //   it->draw(_shader, _clock, it->getPos());
   _context.flush();
