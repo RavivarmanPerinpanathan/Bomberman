@@ -14,11 +14,10 @@ bool		Break::initialize()
 {
   if (_texture.load("./img/break.tga") == false)
     {
-      std::cerr << "Cannot load the ground texture" << std::endl;
+      std::cerr << "Cannot load the break texture" << std::endl;
       return (false);
     }
 
-  _geometry.setColor(glm::vec4(0.9f, 0.9f, 0.9f, 1));
   _geometry.pushVertex(glm::vec3(0, 0, 0));
   _geometry.pushVertex(glm::vec3(1, 0, 0));
   _geometry.pushVertex(glm::vec3(1, 0, 1));
@@ -28,7 +27,6 @@ bool		Break::initialize()
   _geometry.pushUv(glm::vec2(0.0f, 0.0f));
   _geometry.pushUv(glm::vec2(1.0f, 0.0f));
 
-  _geometry.setColor(glm::vec4(0.5f, 0.5f, 0.5f, 1));
   _geometry.pushVertex(glm::vec3(0, 1, 1));
   _geometry.pushVertex(glm::vec3(1, 1, 1));
   _geometry.pushVertex(glm::vec3(1, 0, 1));
@@ -38,7 +36,6 @@ bool		Break::initialize()
   _geometry.pushUv(glm::vec2(1.0f, 1.0f));
   _geometry.pushUv(glm::vec2(0.0f, 1.0f));
 
-  _geometry.setColor(glm::vec4(0.3f, 0.3f, 0.2f, 1));
   _geometry.pushVertex(glm::vec3(1, 0, 0));
   _geometry.pushVertex(glm::vec3(1, 0, 1));
   _geometry.pushVertex(glm::vec3(1, 1, 1));
@@ -48,7 +45,6 @@ bool		Break::initialize()
   _geometry.pushUv(glm::vec2(1.0f, 0.0f));
   _geometry.pushUv(glm::vec2(1.0f, 1.0f));
 
-  _geometry.setColor(glm::vec4(0.3f, 0.3f, 0.2f, 1));
   _geometry.pushVertex(glm::vec3(0, 0, 0));
   _geometry.pushVertex(glm::vec3(0, 0, 1));
   _geometry.pushVertex(glm::vec3(0, 1, 1));

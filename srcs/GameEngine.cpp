@@ -72,8 +72,8 @@ bool		GameEngine::initialize()
       	}
     }
 
-  // _audio.setGameOverMusicVolume(80);
-  // _audio.playGameOverMusic();
+  _audio.setGameOverMusicVolume(80);
+  _audio.playGameOverMusic();
 
   float box = ((_map.getWidth() + _map.getHeight())/2) * _size * 3;
 
@@ -102,9 +102,6 @@ bool		GameEngine::update()
   if (_input.getKey(SDLK_KP_6))
     setView(_baseX + 1, 0, 0);
 
-  // La transformation de la camera correspond a son orientation et sa position
-  // La camera sera ici situee a la position 0, 20, -100 et regardera vers la position 0, 0, 0
-  //lookAt(eye, lookedatpoint, donotuch)
   _transformation = glm::lookAt(glm::vec3(_baseX*_size, _baseY*_size, _baseZ*_size), glm::vec3(_baseX*_size, (_map.getHeight()/2)*_size, 0), glm::vec3(0, 1, 0));
   _shader.setUniform("view", _transformation);
   _shader.setUniform("projection", _projection);

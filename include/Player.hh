@@ -18,9 +18,6 @@ protected:
   gdl::Texture		_texture;
   gdl::Geometry		_geometry;
   gdl::Clock		_clock;
-  // gdl::Model		_model;
-  // float			_speed;
-  //useconds_t         _speed;
 };
 
 #endif /* !__PLAYER_HH__ */

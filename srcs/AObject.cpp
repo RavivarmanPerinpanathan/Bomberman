@@ -1,4 +1,5 @@
 #include "Bomb.hh"
+#include <unistd.h>
 #include "AObject.hh"
 
 AObject::AObject()
@@ -100,7 +101,6 @@ bool			AObject::bombAround(int x, int y, AObject *bomb)
       around = std::make_pair(bomb->getPos().first + (x * i), bomb->getPos().second + (y * i));
       if (getMap()->getMap()[around] != Map::SOLID)
 	{
-	  // draw ici //
 	  if (getMap()->getMap()[around] == Map::BREAK)
 	    {
 	      if (rand() % 2 == 0)
@@ -174,14 +174,8 @@ void			AObject::scale(glm::vec3 const& scale)
 
 glm::mat4		AObject::getTransformation()
 {
-  glm::mat4 transform(1); // On cree une matrice identite
-  // On applique ensuite les rotations selon les axes x, y et z
-  /*  transform = glm::rotate(transform, _rotation.x, glm::vec3(1, 0, 0));
-  transform = glm::rotate(transform, _rotation.y, glm::vec3(0, 1, 0));
-  transform = glm::rotate(transform, _rotation.z, glm::vec3(0, 0, 1));
-  // On effectue ensuite la translation
-  transform = glm::translate(transform, _position);
-  // Et pour finir, on fait la mise a l'echelle*/
+  glm::mat4 transform(1);
+
   transform = glm::scale(transform, _scale);
   return (transform);
 }

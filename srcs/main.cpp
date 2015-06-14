@@ -5,6 +5,9 @@ int	main()
 {
   Menu	menu;
 
-  menu.showMenu();
-  return (0);
+    if (menu.initialize() == false)
+      return (EXIT_FAILURE);
+    while(menu.update()!=false)
+      menu.draw();
+  return (EXIT_SUCCESS);
 }
