@@ -26,10 +26,13 @@ public:
   void				draw();
   std::vector<AObject*> 	_objects;
   gdl::BasicShader		_shader;
-  gdl::Geometry		_geometry;
+  gdl::Geometry			_geometry;
+  gdl::Geometry			_geometry2;
+  
   gdl::SdlContext		_context;
   float				_speed;
   gdl::Texture			_texture;
+  gdl::Texture			_texture2;
   gdl::Clock			_clock;
   int				_playerInput;
   gdl::Input 			_input;
@@ -38,6 +41,7 @@ public:
   int				_yMap; /* récupère input y de la map */
   glm::mat4 			_projection;
   glm::mat4 			_transformation;
+  glm::vec3			_position;
 };
 
 #endif /* !__MENU_HH__ */

@@ -36,23 +36,49 @@ bool			Menu::initialize()
 	 || !_shader.build())
     return false;
   _shader.bind();
-  if (_texture.load("./img/Menu_back.tga") == false)
+
+  // button Player 1
+  if (_texture2.load("./img/ground.tga") == false)
   {
-    std::cerr << "Cannot load Main.tga" << std::endl;
+    std::cerr << "Cannot load Player1.tga" << std::endl;
     return (false);
   }
-  _geometry.pushVertex(glm::vec3(19, -19, 34));
-  _geometry.pushVertex(glm::vec3(19, 19, 34));
-  _geometry.pushVertex(glm::vec3(-19, 19, 19));
-  _geometry.pushVertex(glm::vec3(-19, -19, 19));
+  // _geometry2.pushVertex(glm::vec3(0, 0, 0));
+  // _geometry2.pushVertex(glm::vec3(0, 0, 1));
+  // _geometry2.pushVertex(glm::vec3(0, 1, 1));
+  // _geometry2.pushVertex(glm::vec3(0, 1, 0));
+  _geometry2.pushVertex(glm::vec3(0.25, -0.25, 0.25));
+  _geometry2.pushVertex(glm::vec3(0.25, 0.25, 1));
+  _geometry2.pushVertex(glm::vec3(-0.25, 1, 1));
+  _geometry2.pushVertex(glm::vec3(-0.25, -1, 0.25));
+  
+  _geometry2.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry2.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry2.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry2.pushUv(glm::vec2(1.0f, 1.0f));
+  _geometry2.build();
+
+  //background image
+  if (_texture.load("./img/ground.tga") == false)
+  {
+    std::cerr << "Cannot load Menu_back.tga" << std::endl;
+    return (false);
+  }
+  _geometry.pushVertex(glm::vec3(0, 0, 0));
+  _geometry.pushVertex(glm::vec3(1024, 768, 0));
+  _geometry.pushVertex(glm::vec3(1024, 0, 0));
+  _geometry.pushVertex(glm::vec3(0, 768, 0));
+  
   _geometry.pushUv(glm::vec2(0.0f, 0.0f));
-  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
-  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
   _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+
+
   _geometry.build();
 
-  _projection = glm::perspective(50.0f, 1600.0f / 800.0f, 0.1f, 100.0f);
-  _transformation = glm::lookAt(glm::vec3(0, 20, 50), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+  _projection = glm::perspective(50.0f, 1024.0f / 728.0f, 0.1f, 1000.0f);
+  _transformation = glm::lookAt(glm::vec3(0, 0, 700), glm::vec3(40, 60, 0), glm::vec3(0, 1, 0));
   _shader.setUniform("view", _transformation);
   _shader.setUniform("projection", _projection);
   return true;
@@ -75,15 +101,18 @@ bool			Menu::update()
 
 void Menu::draw()
 {
+  //  _position = glm::vec3(0, 0, 0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _texture.bind();
   _geometry.draw(_shader, getTransformation(), GL_QUADS);
+  //  _texture2.bind();
+  // _geometry2.draw(_shader, getTransformation(), GL_QUADS);
   _shader.bind();
   _context.flush();
 }
 glm::mat4 Menu::getTransformation()
 {
   glm::mat4 transform(1);
-  transform = glm::scale(transform, glm::vec3(20, 20, 1));
+  transform = glm::scale(transform, glm::vec3(20, 20, 0));
   return (transform);
 }
