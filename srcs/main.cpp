@@ -6,7 +6,7 @@ int	main()
   Menu	menu;
 
   
-  menu.initilize();
+  //menu.initialize();
   menu.showMenu();
   return (0);
 }

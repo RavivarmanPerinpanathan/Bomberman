@@ -11,7 +11,7 @@
 #include "Texture.hh"
 #include <Input.hh>
 
-class Menu : public AObject
+class Menu// : public AObject
 {
 public:
   Menu();
@@ -21,7 +21,7 @@ public:
 
   int			eventHandler(gdl::Input &input);
   bool			showMenu();
-  bool			initilize();
+  bool			initialize();
   int			run(Map);
   std::vector<AObject*> _objects;
   gdl::BasicShader	_shader;
@@ -29,6 +29,10 @@ public:
   gdl::SdlContext	_context;
   float			_speed;
   gdl::Texture		_texture;
+  int		_playerInput;
+  int		_botInput; /* récupère input nb bots */
+  int		_xMap; /* récupère input x de la map */
+  int		_yMap; /* récupère input y de la map */
 };
 
 #endif /* !__MENU_HH__ */
