@@ -62,10 +62,11 @@ bool		Solid::initialize()
   return (true);
 }
 
-void		Solid::update(gdl::SdlContext context, gdl::Input &input)
+bool		Solid::update(gdl::SdlContext context, gdl::Input &input)
 {
   (void)context;
   (void)input;
+  return true;
 }
 
 void		Solid::draw(gdl::AShader &shader, int x, int y)

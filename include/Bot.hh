@@ -10,7 +10,7 @@ public:
   virtual ~Bot();
 
   virtual bool		initialize();
-  virtual void		update(gdl::SdlContext, gdl::Input &);
+  virtual bool		update(gdl::SdlContext, gdl::Input &);
   virtual void		draw(gdl::AShader &, int, int);
   glm::mat4		getTransformation();
 

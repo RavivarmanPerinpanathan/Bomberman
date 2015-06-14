@@ -62,10 +62,11 @@ bool		Break::initialize()
   return (true);
 }
 
-void		Break::update(gdl::SdlContext context, gdl::Input &input)
+bool		Break::update(gdl::SdlContext context, gdl::Input &input)
 {
   (void)context;
   (void)input;
+  return true;
 }
 
 void		Break::draw(gdl::AShader &shader, int x, int y)

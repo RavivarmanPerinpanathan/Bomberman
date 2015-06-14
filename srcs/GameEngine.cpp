@@ -126,9 +126,19 @@ void		GameEngine::draw()
     if (_objects[it->second])
       _objects[it->second]->draw(_shader, it->first.second, it->first.first);
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-    (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
+    {
+      // if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
+      // 	it = _players.erase(--it);
+      // else
+	(*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
+    }
   for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
-    (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
+    {
+      // if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
+      // 	it = _bots.erase(--it);
+      // else
+	(*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
+    }
   _context.flush();
 }
 

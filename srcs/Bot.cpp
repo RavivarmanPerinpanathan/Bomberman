@@ -62,10 +62,11 @@ bool		Bot::initialize()
   return (true);
 }
 
-void		Bot::update(gdl::SdlContext context, gdl::Input &input)
+bool		Bot::update(gdl::SdlContext context, gdl::Input &input)
 {
   (void)context;
   (void)input;
+  return true;
 }
 
 void		Bot::draw(gdl::AShader &shader, int x, int y)

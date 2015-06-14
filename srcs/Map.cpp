@@ -222,7 +222,6 @@ int		Map::checkIfCharacter(std::pair<int, int> pos, status character)
 
 void		Map::showMap()
 {
-  std::cout << "in map" << std::endl;
   for (std::map<std::pair<int, int>, status>::iterator it = getMap().begin(); it != getMap().end(); ++it)
     {
       if (it->second == P1)

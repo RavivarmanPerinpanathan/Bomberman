@@ -62,10 +62,11 @@ bool		Simult::initialize()
   return (true);
 }
 
-void		Simult::update(gdl::SdlContext context, gdl::Input &input)
+bool		Simult::update(gdl::SdlContext context, gdl::Input &input)
 {
   (void)context;
   (void)input;
+  return true;
 }
 
 void		Simult::draw(gdl::AShader &shader, int x, int y)

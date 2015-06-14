@@ -62,10 +62,11 @@ bool		Speed::initialize()
   return (true);
 }
 
-void		Speed::update(gdl::SdlContext context, gdl::Input &input)
+bool		Speed::update(gdl::SdlContext context, gdl::Input &input)
 {
   (void)context;
   (void)input;
+  return true;
 }
 
 void		Speed::draw(gdl::AShader &shader, int x, int y)

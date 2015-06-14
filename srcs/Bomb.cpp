@@ -1,7 +1,6 @@
 #include "Bomb.hh"
 
-Bomb::Bomb(int idx, int range, std::pair<int, int> pos)
-  : _idx(idx), _range(range), _pos(pos)
+Bomb::Bomb()
 {
 
 }
@@ -11,51 +10,80 @@ Bomb::~Bomb()
 
 }
 
-Bomb::Bomb(Bomb const &c)
-  : _idx(c._idx), _range(c._range), _pos(c._pos)
+bool		Bomb::initialize()
 {
-
-}
-
-Bomb		&Bomb::operator=(Bomb const &c)
-{
-  if (this != &c)
+  if (_texture.load("./img/brick.tga") == false)
     {
-      _idx = c._idx;
-      _range = c._range;
-      _pos = c._pos;
+      std::cerr << "Cannot load the ground texture" << std::endl;
+      return (false);
     }
-  return (*this);
-}
 
-int			Bomb::getRange() const
-{
-  return (_range);
-}
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 1.0f, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 0));
+  _geometry.pushVertex(glm::vec3(1, 0, 0));
+  _geometry.pushVertex(glm::vec3(1, 0, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 1));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
 
-int			Bomb::getIdx() const
-{
-  return (_idx);
-}
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 1.0f, 1));
+  _geometry.pushVertex(glm::vec3(0, 1, 1));
+  _geometry.pushVertex(glm::vec3(1, 1, 1));
+  _geometry.pushVertex(glm::vec3(1, 0, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 1));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
 
-std::pair<int, int>	Bomb::getPos() const
-{
-  return (_pos);
-}
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 1.0f, 1));
+  _geometry.pushVertex(glm::vec3(1, 0, 0));
+  _geometry.pushVertex(glm::vec3(1, 0, 1));
+  _geometry.pushVertex(glm::vec3(1, 1, 1));
+  _geometry.pushVertex(glm::vec3(1, 1, 0));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
 
-bool	Bomb::initialize()
-{
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 1.0f, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 0));
+  _geometry.pushVertex(glm::vec3(0, 0, 1));
+  _geometry.pushVertex(glm::vec3(0, 1, 1));
+  _geometry.pushVertex(glm::vec3(0, 1, 0));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+
+  _geometry.build();
   return (true);
 }
 
-void	Bomb::update()
-{}
+bool		Bomb::update(gdl::SdlContext context, gdl::Input &input)
+{
+  _time += _clock.getElapsed();
+  context.updateClock(_clock);
+  if (_time > 2.0f)
+    return false;
+  (void)input;
+  return true;
+}
 
-void	Bomb::draw()
-{}
+void		Bomb::draw(gdl::AShader &shader, int x, int y)
+{
+  _position = glm::vec3(x, y, 0);
+  _texture.bind();
+  _geometry.draw(shader, getTransformation(), GL_QUADS);
+}
 
 glm::mat4	Bomb::getTransformation()
 {
   glm::mat4	transform(1);
+
+  transform = glm::scale(transform, glm::vec3(20, 20, 20));
+  transform = glm::translate(transform, _position);
   return (transform);
 }

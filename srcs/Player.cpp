@@ -2,7 +2,9 @@
 
 Player::Player()
 {
-
+  _range = 2;
+  _simult = 1;
+  _speed = 0.3f;
 }
 
 Player::~Player()
@@ -62,11 +64,11 @@ bool		Player::initialize()
   return (true);
 }
 
-void		Player::update(gdl::SdlContext context, gdl::Input &input)
+bool		Player::update(gdl::SdlContext context, gdl::Input &input)
 {
   _time += _clock.getElapsed();
   context.updateClock(_clock);
-  if (_time > 0.3f)
+  if (_time > _speed)
     {
       if (getId() == 0 && input.getKey(SDLK_UP))
 	updateMap(getPos(), std::make_pair(1, 0));
@@ -76,6 +78,9 @@ void		Player::update(gdl::SdlContext context, gdl::Input &input)
 	updateMap(getPos(), std::make_pair(0, -1));
       if (getId() == 0 && input.getKey(SDLK_RIGHT))
 	updateMap(getPos(), std::make_pair(0, 1));
+      if (getId() == 0 && input.getKey(SDLK_RSHIFT))
+	if (dropBomb() == false)
+	  return false;
       if (getId() == 1 && input.getKey(SDLK_z))
 	updateMap(getPos(), std::make_pair(1, 0));
       if (getId() == 1 && input.getKey(SDLK_s))
@@ -84,7 +89,17 @@ void		Player::update(gdl::SdlContext context, gdl::Input &input)
 	updateMap(getPos(), std::make_pair(0, -1));
       if (getId() == 1 && input.getKey(SDLK_d))
 	updateMap(getPos(), std::make_pair(0, 1));
+      if (getId() == 1 && input.getKey(SDLK_SPACE))
+	if (dropBomb() == false)
+	  return false;
     }
+  for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
+    if ((*it)->update(context, input) == false)
+      {
+	updateBomb(it - _bomb.begin(), (*it));
+	break;
+      }
+  return true;
 }
 
 void		Player::draw(gdl::AShader &shader, int x, int y)
@@ -92,6 +107,8 @@ void		Player::draw(gdl::AShader &shader, int x, int y)
   _position = glm::vec3(x, y, 0);
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);
+  for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
+    (*it)->draw(shader, (*it)->getPos().second, (*it)->getPos().first);
 }
 
 glm::mat4	Player::getTransformation()

@@ -1,33 +1,23 @@
-#ifndef __BOMB_HH_
-# define __BOMB_HH_
+#ifndef __BOMB_HH__
+# define __BOMB_HH__
 
 #include "AObject.hh"
 
 class Bomb : public AObject
 {
 public:
-  Bomb(int, int, std::pair<int, int>);
+  Bomb();
   virtual ~Bomb();
-  Bomb(Bomb const &);
-  Bomb &operator=(Bomb const &);
-  virtual bool	initialize();
-  virtual void	 update();
-  virtual void	draw();
-  glm::mat4	getTransformation();
 
-  int			getRange() const;
-  int			getIdx() const;
-  std::pair<int, int>	getPos() const;
-
-private:
-  
-  gdl::Texture	_texture;
-  gdl::Geometry	_geometry;
+  virtual bool		initialize();
+  virtual bool		update(gdl::SdlContext, gdl::Input &);
+  virtual void		draw(gdl::AShader &shader, int, int);
+  glm::mat4		getTransformation();
 
 protected:
-  int			_idx;
-  int			_range;
-  std::pair<int, int>	_pos;
+  gdl::Texture		_texture;
+  gdl::Geometry		_geometry;
+  gdl::Clock		_clock;
 };
 
 #endif /* !__BOMB_HH__ */

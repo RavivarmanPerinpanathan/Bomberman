@@ -34,6 +34,12 @@ AObject *BlockFactory::createInstance(Map::status status)
     return (new Player());
   else if (status == Map::BOT)
     return (new Bot());
+  else if (status == Map::SPEED)
+    return (new Speed());
+  else if (status == Map::SIMULT)
+    return (new Simult());
+  else if (status == Map::RANGE)
+    return (new Range());
   return (NULL);
 }
 // void BlockFactory::init_map() {

@@ -62,10 +62,11 @@ bool		Range::initialize()
   return (true);
 }
 
-void		Range::update(gdl::SdlContext context, gdl::Input &input)
+bool		Range::update(gdl::SdlContext context, gdl::Input &input)
 {
   (void)context;
   (void)input;
+  return true;
 }
 
 void		Range::draw(gdl::AShader &shader, int x, int y)
