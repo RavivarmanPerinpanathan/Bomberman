@@ -106,6 +106,8 @@ bool			AObject::bombAround(int x, int y, AObject *bomb)
 	    {
 	      if (rand() % 2 == 0)
 		getMap()->setBox(around, static_cast<Map::status>(Map::SPEED + rand() % 3));
+	      else
+		getMap()->setBox(around, Map::EMPTY);
 	      return true;
 	    }
 	  getMap()->setBox(around, Map::EMPTY);
@@ -142,8 +144,8 @@ void			AObject::updateMap(std::pair<int, int> curPos, std::pair<int, int> newPos
 {
   newPos.first = curPos.first + newPos.first;
   newPos.second = curPos.second + newPos.second;
-  // for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
-  //   getMap()->setBox((*it)->getPos(), Map::BOMB);
+  for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
+    getMap()->setBox((*it)->getPos(), Map::BOMB);
   if (getMap()->getMap()[newPos] == Map::EMPTY || getMap()->getMap()[newPos] == Map::RANGE
       || getMap()->getMap()[newPos] == Map::SIMULT || getMap()->getMap()[newPos] == Map::SPEED)
     {

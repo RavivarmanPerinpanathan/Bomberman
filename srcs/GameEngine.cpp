@@ -71,8 +71,8 @@ bool		GameEngine::initialize()
       	}
     }
 
-  _audio.setGameOverMusicVolume(80);
-  _audio.playGameOverMusic();
+  // _audio.setGameOverMusicVolume(80);
+  // _audio.playGameOverMusic();
 
   float box = ((_map.getWidth() + _map.getHeight())/2) * _size * 3;
 
