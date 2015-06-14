@@ -3,10 +3,15 @@
 
 int	main()
 {
-  Menu	menu;
+  //Menu	menu;
 
   
   //menu.initialize();
-  menu.showMenu();
+//  menu.initialize();
+  Menu		menu;
+  if (menu.initialize() == false)
+    return (EXIT_FAILURE);
+  while (menu.update() != false)
+    menu.draw();
   return (0);
 }

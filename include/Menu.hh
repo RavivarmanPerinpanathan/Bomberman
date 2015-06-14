@@ -9,9 +9,11 @@
 #include "Map.hh"
 #include "GameEngine.hh"
 #include "Texture.hh"
+#include "Intro.hh"
 #include <Input.hh>
+#include <glm/gtc/matrix_transform.hpp>
 
-class Menu// : public AObject
+class Menu : public gdl::Game
 {
 public:
   Menu();
@@ -19,20 +21,24 @@ public:
   Menu(Menu const &);
   Menu	&operator=(Menu const &);
 
-  int			eventHandler(gdl::Input &input);
-  bool			showMenu();
-  bool			initialize();
-  int			run(Map);
-  std::vector<AObject*> _objects;
-  gdl::BasicShader	_shader;
+  bool				update();
+  bool				initialize();
+  glm::mat4 				getTransformation();
+  void				draw();
+  std::vector<AObject*> 	_objects;
+  gdl::BasicShader		_shader;
   gdl::Geometry		_geometry;
-  gdl::SdlContext	_context;
-  float			_speed;
-  gdl::Texture		_texture;
-  int		_playerInput;
-  int		_botInput; /* récupère input nb bots */
-  int		_xMap; /* récupère input x de la map */
-  int		_yMap; /* récupère input y de la map */
+  gdl::SdlContext		_context;
+  float				_speed;
+  gdl::Texture			_texture;
+  gdl::Clock			_clock;
+  int				_playerInput;
+  gdl::Input 			_input;
+  int				_botInput; /* récupère input nb bots */
+  int				_xMap; /* récupère input x de la map */
+  int				_yMap; /* récupère input y de la map */
+  glm::mat4 			_projection;
+  glm::mat4 			_transformation;
 };
 
 #endif /* !__MENU_HH__ */
