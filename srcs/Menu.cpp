@@ -1,9 +1,8 @@
 #include "Menu.hh"
 
 Menu::Menu()
-: _playerInput(2), _botInput(5), _xMap(30), _yMap(20)
+: _playerInput(2), _botInput(5), _xMap(30), _yMap(20), _speed(0.3), _time(0.0)
 {
-
 }
 
 Menu::~Menu()
@@ -14,15 +13,15 @@ Menu::~Menu()
 
 Menu::Menu(Menu const &c)
 {
-  (void)c;
+(void)c;
 }
 
 Menu			&Menu::operator=(Menu const &c)
 {
-  if (this != &c)
-    {
-    }
-  return (*this);
+if (this != &c)
+{
+}
+return (*this);
 }
 
 
@@ -60,49 +59,72 @@ bool			Menu::initialize()
 
 bool			Menu::update()
 {
-  _context.updateClock(_clock);
   _context.updateInputs(_input);
   glm::ivec2 mouse;
+  bool		created;
 
-   if (_input.getKey(SDLK_ESCAPE))
-     return (false);
-  if (_input.getKey(SDL_BUTTON_LEFT))
+  if (_input.getKey(SDLK_ESCAPE))
+    return (false);
+  if (_time > _speed)
   {
-    mouse = _input.getMousePosition();
-    if (mouse.x < (WIDTH / 2) - 20 && mouse.y < (HEIGHT / 4) - 40)
-	 _playerInput = 1;
-    if (mouse.x < (WIDTH / 2) - 20 && (mouse.y > (HEIGHT / 4) - 40 && mouse.y < (HEIGHT / 8) + (HEIGHT / 4) - 40))
-	 _playerInput = 2;
-    if (mouse.x < (WIDTH / 2) - 20 && (mouse.y > (HEIGHT / 8) + (HEIGHT / 4) - 40 && mouse.y < (HEIGHT / 2) - 40))
+    _time = 0;
+    created = false;
+    if (_input.getKey(SDL_BUTTON_LEFT))
     {
-	 if (mouse.x < (WIDTH / 4) - 20)
-	   _botInput -= 1;
-	 else
-	   _botInput += 1;
-    }
-    if (mouse.x < (WIDTH / 2) - 20 && (mouse.y > (HEIGHT / 2) - 40 && mouse.y < (HEIGHT / 2) + HEIGHT / 8 - 40))
-    {
-	 if (mouse.x < (WIDTH / 4) - 20)
-	   _xMap -= 1;
-	 else
-	   _xMap += 1;
-    }
-    if (mouse.x < (WIDTH / 2) - 20 && (mouse.y > (HEIGHT / 2) + HEIGHT / 8 - 35) && mouse.y < (HEIGHT / 2 + HEIGHT / 4))
-    {
-	 if (mouse.x < (WIDTH / 4) - 20)
-	   _yMap -= 1;
-	 else
-	   _yMap += 1;
-    }
-    if (mouse.x < (WIDTH / 2) - 20 && mouse.y > (HEIGHT / 2 + HEIGHT / 4))
-    {
-	 Map		map(_xMap, _yMap, _playerInput, _botInput);
+	 mouse = _input.getMousePosition();
+	 if (mouse.x < (WIDTH / 2) - 20 && mouse.y < (HEIGHT / 4) - 40)
+	 {
+	   std::cout << "One player mode !" << std::endl;
 
-	 if (map.getWidth() < 10 || map.getHeight() < 10 || map.setRandomMap() == 1)
-	   return (1);
-	 run(map);
+	   _playerInput = 1;
+	 }
+	 if (mouse.x < (WIDTH / 2) - 20 &&
+			(mouse.y > (HEIGHT / 4) - 40 && mouse.y < (HEIGHT / 8) + (HEIGHT / 4) - 40))
+	 {
+	   std::cout << "Two players mode !" << std::endl;
+	   _playerInput = 2;
+	 }
+	 if (mouse.x < (WIDTH / 2) - 20 &&
+			(mouse.y > (HEIGHT / 8) + (HEIGHT / 4) - 40 && mouse.y < (HEIGHT / 2) - 40))
+	 {
+	   if (mouse.x < (WIDTH / 4) - 20)
+		_botInput -= 1;
+	   else
+		_botInput += 1;
+	   std::cout << "Bots = " << _botInput << std::endl;
+	 }
+	 if (mouse.x < (WIDTH / 2) - 20 &&
+			(mouse.y > (HEIGHT / 2) - 40 && mouse.y < (HEIGHT / 2) + HEIGHT / 8 - 40))
+	 {
+	   if (mouse.x < (WIDTH / 4) - 20)
+		_xMap -= 1;
+	   else
+		_xMap += 1;
+	   std::cout << "X map = " << _xMap << std::endl;
+	 }
+	 if (mouse.x < (WIDTH / 2) - 20 && (mouse.y > (HEIGHT / 2) + HEIGHT / 8 - 35) &&
+									mouse.y < (HEIGHT / 2 + HEIGHT / 4)) {
+	   if (mouse.x < (WIDTH / 4) - 20)
+		_yMap -= 1;
+	   else
+		_yMap += 1;
+	   std::cout << "Y map = " << _yMap << std::endl;
+	 }
+	 if (mouse.x<(WIDTH / 2) - 20 && mouse.y>(HEIGHT / 2 + HEIGHT / 4)) {
+	   if (created == false) {
+		created = true;
+		Map map(_xMap, _yMap, _playerInput, _botInput);
+
+		if (map.getWidth() < 10 || map.getHeight() < 10 || map.setRandomMap() == 1)
+		  return (1);
+		_context.stop();
+		run(map);
+	   }
+	 }
     }
   }
+  _time += _clock.getElapsed();
+  _context.updateClock(_clock);
   _transformation = glm::lookAt(glm::vec3(790, 560, -1200), glm::vec3(790, 560, 0), glm::vec3(0, 1, 0));
   _shader.setUniform("view", _transformation);
   _shader.setUniform("projection", _projection);
@@ -127,6 +149,7 @@ void Menu::draw()
   _shader.bind();
   _context.flush();
 }
+
 glm::mat4 Menu::getTransformation()
 {
   glm::mat4 transform(1);

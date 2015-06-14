@@ -31,7 +31,6 @@ public:
   gdl::BasicShader		_shader;
   gdl::Geometry			_geometry;
   gdl::SdlContext		_context;
-  float				_speed;
   gdl::Texture			_texture;
   gdl::Clock			_clock;
   gdl::Input 			_input;
@@ -44,6 +43,8 @@ private:
   int				_botInput;
   int				_xMap;
   int				_yMap;
+  float				_speed;
+  float				_time;
 };
 
 #endif /* !__MENU_HH__ */
