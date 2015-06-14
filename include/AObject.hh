@@ -22,8 +22,8 @@ public:
   AObject();
   virtual ~AObject();
 
-  int			getId() const;
-  void			setId(int id);
+  Map::status		getMapEnum() const;
+  void			setMapEnum(Map::status);
   std::pair<int, int>	getPos() const;
   void			setPos(std::pair<int, int>);
   float			getSpeed() const;
@@ -53,14 +53,13 @@ protected:
   glm::vec3		_rotation;
   glm::vec3		_scale;
   std::pair<int, int>	_pos;
-  int			_id;
+  Map::status		_mapEnum;
   Map			*_map;
   float			_time;
   float			_speed;
   int			_simult;
   int			_range;
   std::vector<AObject*>	_bomb;
-  // BlockFactory		_factory;
 };
 
 #endif /* !__AOBJECT_HH__ */

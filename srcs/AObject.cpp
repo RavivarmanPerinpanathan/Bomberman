@@ -12,14 +12,14 @@ AObject::~AObject()
 
 }
 
-int			AObject::getId() const
+Map::status		AObject::getMapEnum() const
 {
-  return (_id);
+  return (_mapEnum);
 }
 
-void			AObject::setId(int id)
+void			AObject::setMapEnum(Map::status mapEnum)
 {
-  _id = id;
+  _mapEnum = mapEnum;
 }
 
 std::pair<int, int>	AObject::getPos() const
@@ -74,6 +74,7 @@ void			AObject::setMap(Map *map)
 
 bool			AObject::dropBomb()
 {
+  std::cout << "simult = " << getSimult() << std::endl;;
   if (_simult > 0)
     {
       AObject *bomb;
@@ -86,6 +87,7 @@ bool			AObject::dropBomb()
       getMap()->setBox(bomb->getPos(), Map::BOMB);
       _bomb.push_back(bomb);
       setSimult(getSimult() - 1);
+      _time = 0;
     }
   return true;
 }
@@ -101,11 +103,11 @@ bool			AObject::bombAround(int x, int y, AObject *bomb)
 	{
 	  // draw ici //
 	  if (getMap()->getMap()[around] == Map::BREAK)
-	    if (rand() % 2 == 0)
-	      {
+	    {
+	      if (rand() % 2 == 0)
 		getMap()->setBox(around, static_cast<Map::status>(Map::SPEED + rand() % 3));
-		return true;
-	      }
+	      return true;
+	    }
 	  getMap()->setBox(around, Map::EMPTY);
 	}
       else
@@ -128,7 +130,8 @@ void			AObject::updateBomb(int it, AObject *bomb)
 void			AObject::updateStat(Map::status status)
 {
   if (status == Map::SPEED)
-    setSpeed(getSpeed() - 0.05f);
+    if (getSpeed() > 0.5f)
+      setSpeed(getSpeed() - 0.01f);
   if (status == Map::SIMULT)
     setSimult(getSimult() + 1);
   if (status == Map::RANGE)
@@ -139,16 +142,19 @@ void			AObject::updateMap(std::pair<int, int> curPos, std::pair<int, int> newPos
 {
   newPos.first = curPos.first + newPos.first;
   newPos.second = curPos.second + newPos.second;
+  // for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
+  //   getMap()->setBox((*it)->getPos(), Map::BOMB);
   if (getMap()->getMap()[newPos] == Map::EMPTY || getMap()->getMap()[newPos] == Map::RANGE
       || getMap()->getMap()[newPos] == Map::SIMULT || getMap()->getMap()[newPos] == Map::SPEED)
     {
       if (getMap()->getMap()[newPos] != Map::EMPTY)
 	updateStat(getMap()->getMap()[newPos]);
       setPos(newPos);
-      getMap()->setBox(newPos, getMap()->getMap()[curPos]);
+      getMap()->setBox(newPos, getMapEnum());
       getMap()->setBox(curPos, Map::EMPTY);
       _time = 0;
     }
+  getMap()->showMap();
 }
 
 void			AObject::translate(glm::vec3 const &v)

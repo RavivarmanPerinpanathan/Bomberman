@@ -16,6 +16,7 @@ public:
 
   bool			initialize();
   bool			update();
+  void			drawCharacters();
   void			draw();
   void			translate(glm::vec3 const &v);
   void			rotate(glm::vec3 const& axis, float angle);

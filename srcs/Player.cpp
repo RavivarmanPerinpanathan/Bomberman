@@ -4,7 +4,7 @@ Player::Player()
 {
   _range = 2;
   _simult = 1;
-  _speed = 0.3f;
+  _speed = 0.25f;
 }
 
 Player::~Player()
@@ -66,39 +66,40 @@ bool		Player::initialize()
 
 bool		Player::update(gdl::SdlContext context, gdl::Input &input)
 {
-  _time += _clock.getElapsed();
-  context.updateClock(_clock);
   if (_time > _speed)
     {
-      if (getId() == 0 && input.getKey(SDLK_UP))
+      if (getMapEnum() == 7 && input.getKey(SDLK_UP))
 	updateMap(getPos(), std::make_pair(1, 0));
-      if (getId() == 0 && input.getKey(SDLK_DOWN))
+      if (getMapEnum() == 7 && input.getKey(SDLK_DOWN))
 	updateMap(getPos(), std::make_pair(-1, 0));
-      if (getId() == 0 && input.getKey(SDLK_LEFT))
+      if (getMapEnum() == 7 && input.getKey(SDLK_LEFT))
 	updateMap(getPos(), std::make_pair(0, -1));
-      if (getId() == 0 && input.getKey(SDLK_RIGHT))
+      if (getMapEnum() == 7 && input.getKey(SDLK_RIGHT))
 	updateMap(getPos(), std::make_pair(0, 1));
-      if (getId() == 0 && input.getKey(SDLK_RSHIFT))
+      if (getMapEnum() == 7 && input.getKey(SDLK_RSHIFT))
 	if (dropBomb() == false)
 	  return false;
-      if (getId() == 1 && input.getKey(SDLK_z))
+      if (getMapEnum() == 8 && input.getKey(SDLK_z))
 	updateMap(getPos(), std::make_pair(1, 0));
-      if (getId() == 1 && input.getKey(SDLK_s))
+      if (getMapEnum() == 8 && input.getKey(SDLK_s))
 	updateMap(getPos(), std::make_pair(-1, 0));
-      if (getId() == 1 && input.getKey(SDLK_q))
+      if (getMapEnum() == 8 && input.getKey(SDLK_q))
 	updateMap(getPos(), std::make_pair(0, -1));
-      if (getId() == 1 && input.getKey(SDLK_d))
+      if (getMapEnum() == 8 && input.getKey(SDLK_d))
 	updateMap(getPos(), std::make_pair(0, 1));
-      if (getId() == 1 && input.getKey(SDLK_SPACE))
+      if (getMapEnum() == 8 && input.getKey(SDLK_SPACE))
 	if (dropBomb() == false)
 	  return false;
     }
-  for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
-    if ((*it)->update(context, input) == false)
-      {
+  for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end();)
+    {
+      if ((*it)->update(context, input) == false)
 	updateBomb(it - _bomb.begin(), (*it));
-	break;
-      }
+      else
+	++it;
+    }
+  _time += _clock.getElapsed();
+  context.updateClock(_clock);
   return true;
 }
 

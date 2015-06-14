@@ -38,7 +38,7 @@ bool		GameEngine::initialize()
   _geometry.pushUv(glm::vec2(1.0f, 0.0f));
   _geometry.build();
 
-  for (int Ienum = Map::SOLID; Ienum != Map::SIMULT; Ienum++)
+  for (int Ienum = Map::SOLID; Ienum != Map::P1; Ienum++)
     {
       _objects[static_cast<Map::status>(Ienum)] = _blockFactory.createInstance(static_cast<Map::status>(Ienum));
       if (_objects[static_cast<Map::status>(Ienum)] && _objects[static_cast<Map::status>(Ienum)]->initialize() == false)
@@ -56,7 +56,7 @@ bool		GameEngine::initialize()
   	    return false;
       	  player->setMap(&_map);
       	  player->setPos((*it).first);
-      	  player->setId((*it).second - 7);
+      	  player->setMapEnum((*it).second);
   	  _players.push_back(player);
   	}
       if ((*it).second == Map::BOT)
@@ -83,8 +83,6 @@ bool		GameEngine::initialize()
 
 bool		GameEngine::update()
 {
-  _context.updateClock(_clock);
-  _context.updateInputs(_input);
 
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
     return false;
@@ -112,7 +110,40 @@ bool		GameEngine::update()
 
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
     (*it)->update(_context, _input);
+
+  _context.updateClock(_clock);
+  _context.updateInputs(_input);
   return true;
+}
+
+void		GameEngine::drawCharacters()
+{
+  for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end();)
+    {
+      if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
+	{
+	  // delete (*it);
+	  it = _players.erase(it);
+	}
+      else
+	{
+	  (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
+	  ++it;
+	}
+    }
+  for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end();)
+    {
+      if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
+	{
+	  // delete (*it);
+	  it = _bots.erase(it);
+	}
+      else
+	{
+	  (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
+	  ++it;
+	}
+    }
 }
 
 void		GameEngine::draw()
@@ -125,20 +156,7 @@ void		GameEngine::draw()
   for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
     if (_objects[it->second])
       _objects[it->second]->draw(_shader, it->first.second, it->first.first);
-  for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-    {
-      // if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
-      // 	it = _players.erase(--it);
-      // else
-	(*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
-    }
-  for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
-    {
-      // if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
-      // 	it = _bots.erase(--it);
-      // else
-	(*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
-    }
+  drawCharacters();
   _context.flush();
 }
 
