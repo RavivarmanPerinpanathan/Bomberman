@@ -30,7 +30,7 @@ int			Menu::eventHandler()
 
   /* si on catch click souris sur le bouton "Menu" */
   int		playerInput = 2;
-  int		botInput = 10; /* récupère input nb bots */
+  int		botInput = 5; /* récupère input nb bots */
   int		xMap = 30; /* récupère input x de la map */
   int		yMap = 20; /* récupère input y de la map */
 
