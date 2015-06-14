@@ -36,7 +36,7 @@ bool			Menu::initialize()
 	 || !_shader.build())
     return false;
   _shader.bind();
-  if (_texture.load("./img/Main.tga") == false)
+  if (_texture.load("./img/Menu_back.tga") == false)
   {
     std::cerr << "Cannot load Main.tga" << std::endl;
     return (false);

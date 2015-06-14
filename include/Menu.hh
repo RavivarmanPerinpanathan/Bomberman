@@ -9,7 +9,6 @@
 #include "Map.hh"
 #include "GameEngine.hh"
 #include "Texture.hh"
-#include "Intro.hh"
 #include <Input.hh>
 #include <glm/gtc/matrix_transform.hpp>
 
