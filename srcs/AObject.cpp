@@ -51,6 +51,7 @@ void		AObject::updateMap(std::pair<int, int> curPos, std::pair<int, int> newPos)
       setPos(newPos);
       getMap()->setBox(newPos, getMap()->getMap()[curPos]);
       getMap()->setBox(curPos, Map::EMPTY);
+      _time = 0;
     }
 }
 

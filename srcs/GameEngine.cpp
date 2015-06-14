@@ -111,7 +111,7 @@ bool		GameEngine::update()
   _shader.setUniform("projection", _projection);
 
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-    (*it)->update(_input);
+    (*it)->update(_context, _input);
   return true;
 }
 

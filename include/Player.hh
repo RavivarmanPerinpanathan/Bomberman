@@ -10,13 +10,14 @@ public:
   virtual ~Player();
 
   virtual bool		initialize();
-  virtual void		update(gdl::Input &input);
+  virtual void		update(gdl::SdlContext, gdl::Input &);
   virtual void		draw(gdl::AShader &shader, int, int);
   glm::mat4		getTransformation();
 
 protected:
   gdl::Texture		_texture;
   gdl::Geometry		_geometry;
+  gdl::Clock		_clock;
   // gdl::Model		_model;
   // float			_speed;
   //useconds_t         _speed;

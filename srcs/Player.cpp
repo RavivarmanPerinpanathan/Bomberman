@@ -62,24 +62,29 @@ bool		Player::initialize()
   return (true);
 }
 
-void		Player::update(gdl::Input &input)
+void		Player::update(gdl::SdlContext context, gdl::Input &input)
 {
-  if (getId() == 0 && input.getKey(SDLK_UP))
-    updateMap(getPos(), std::make_pair(1, 0));
-  if (getId() == 0 && input.getKey(SDLK_DOWN))
-    updateMap(getPos(), std::make_pair(-1, 0));
-  if (getId() == 0 && input.getKey(SDLK_LEFT))
-    updateMap(getPos(), std::make_pair(0, -1));
-  if (getId() == 0 && input.getKey(SDLK_RIGHT))
-    updateMap(getPos(), std::make_pair(0, 1));
-  if (getId() == 1 && input.getKey(SDLK_z))
-    updateMap(getPos(), std::make_pair(1, 0));
-  if (getId() == 1 && input.getKey(SDLK_s))
-    updateMap(getPos(), std::make_pair(-1, 0));
-  if (getId() == 1 && input.getKey(SDLK_q))
-    updateMap(getPos(), std::make_pair(0, -1));
-  if (getId() == 1 && input.getKey(SDLK_d))
-    updateMap(getPos(), std::make_pair(0, 1));
+  _time += _clock.getElapsed();
+  context.updateClock(_clock);
+  if (_time > 0.3f)
+    {
+      if (getId() == 0 && input.getKey(SDLK_UP))
+	updateMap(getPos(), std::make_pair(1, 0));
+      if (getId() == 0 && input.getKey(SDLK_DOWN))
+	updateMap(getPos(), std::make_pair(-1, 0));
+      if (getId() == 0 && input.getKey(SDLK_LEFT))
+	updateMap(getPos(), std::make_pair(0, -1));
+      if (getId() == 0 && input.getKey(SDLK_RIGHT))
+	updateMap(getPos(), std::make_pair(0, 1));
+      if (getId() == 1 && input.getKey(SDLK_z))
+	updateMap(getPos(), std::make_pair(1, 0));
+      if (getId() == 1 && input.getKey(SDLK_s))
+	updateMap(getPos(), std::make_pair(-1, 0));
+      if (getId() == 1 && input.getKey(SDLK_q))
+	updateMap(getPos(), std::make_pair(0, -1));
+      if (getId() == 1 && input.getKey(SDLK_d))
+	updateMap(getPos(), std::make_pair(0, 1));
+    }
 }
 
 void		Player::draw(gdl::AShader &shader, int x, int y)

@@ -62,8 +62,9 @@ bool		Simult::initialize()
   return (true);
 }
 
-void		Simult::update(gdl::Input &input)
+void		Simult::update(gdl::SdlContext context, gdl::Input &input)
 {
+  (void)context;
   (void)input;
 }
 

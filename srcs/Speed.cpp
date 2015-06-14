@@ -62,8 +62,9 @@ bool		Speed::initialize()
   return (true);
 }
 
-void		Speed::update(gdl::Input &input)
+void		Speed::update(gdl::SdlContext context, gdl::Input &input)
 {
+  (void)context;
   (void)input;
 }
 

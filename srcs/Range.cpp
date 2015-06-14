@@ -62,8 +62,9 @@ bool		Range::initialize()
   return (true);
 }
 
-void		Range::update(gdl::Input &input)
+void		Range::update(gdl::SdlContext context, gdl::Input &input)
 {
+  (void)context;
   (void)input;
 }
 

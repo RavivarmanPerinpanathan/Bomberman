@@ -62,8 +62,9 @@ bool		Solid::initialize()
   return (true);
 }
 
-void		Solid::update(gdl::Input &input)
+void		Solid::update(gdl::SdlContext context, gdl::Input &input)
 {
+  (void)context;
   (void)input;
 }
 

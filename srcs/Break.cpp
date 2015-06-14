@@ -62,8 +62,9 @@ bool		Break::initialize()
   return (true);
 }
 
-void		Break::update(gdl::Input &input)
+void		Break::update(gdl::SdlContext context, gdl::Input &input)
 {
+  (void)context;
   (void)input;
 }
 

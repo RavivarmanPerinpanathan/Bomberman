@@ -62,8 +62,9 @@ bool		Bot::initialize()
   return (true);
 }
 
-void		Bot::update(gdl::Input &input)
+void		Bot::update(gdl::SdlContext context, gdl::Input &input)
 {
+  (void)context;
   (void)input;
 }
 
