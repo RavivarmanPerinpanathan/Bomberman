@@ -74,7 +74,6 @@ void			AObject::setMap(Map *map)
 
 bool			AObject::dropBomb()
 {
-  std::cout << "simult = " << getSimult() << std::endl;;
   if (_simult > 0)
     {
       AObject *bomb;
@@ -156,7 +155,6 @@ void			AObject::updateMap(std::pair<int, int> curPos, std::pair<int, int> newPos
       getMap()->setBox(curPos, Map::EMPTY);
       _time = 0;
     }
-  getMap()->showMap();
 }
 
 void			AObject::translate(glm::vec3 const &v)

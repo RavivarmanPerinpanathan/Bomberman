@@ -94,7 +94,10 @@ bool		Player::update(gdl::SdlContext context, gdl::Input &input)
   for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end();)
     {
       if ((*it)->update(context, input) == false)
-	updateBomb(it - _bomb.begin(), (*it));
+	{
+	  updateBomb(it - _bomb.begin(), (*it));
+	  delete (*it);
+	}
       else
 	++it;
     }
@@ -110,6 +113,7 @@ void		Player::draw(gdl::AShader &shader, int x, int y)
   _geometry.draw(shader, getTransformation(), GL_QUADS);
   for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end(); ++it)
     (*it)->draw(shader, (*it)->getPos().second, (*it)->getPos().first);
+
 }
 
 glm::mat4	Player::getTransformation()

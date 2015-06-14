@@ -9,8 +9,9 @@ GameEngine::GameEngine(Map &map)
 
 GameEngine::~GameEngine()
 {
-  // for (std::map<Map::status, AObject *>::iterator it = _objects.begin(); it != _objects.end(); ++it)
-  //   delete it->second;
+  _objects.clear();
+  _players.clear();
+  _bots.clear();
 }
 
 bool		GameEngine::initialize()
@@ -122,7 +123,7 @@ void		GameEngine::drawCharacters()
     {
       if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
 	{
-	  // delete (*it);
+	  delete (*it);
 	  it = _players.erase(it);
 	}
       else
@@ -135,7 +136,7 @@ void		GameEngine::drawCharacters()
     {
       if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
 	{
-	  // delete (*it);
+	  delete (*it);
 	  it = _bots.erase(it);
 	}
       else
