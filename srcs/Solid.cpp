@@ -10,7 +10,7 @@ Solid::~Solid()
 
 }
 
-bool	Solid::initialize()
+bool		Solid::initialize()
 {
   if (_texture.load("./img/brick.tga") == false)
     {
@@ -62,13 +62,13 @@ bool	Solid::initialize()
   return (true);
 }
 
-void	Solid::update(gdl::Clock const &clock, gdl::Input &input)
+void		Solid::update(gdl::Clock const &clock, gdl::Input &input)
 {
   (void)clock;
   (void)input;
 }
 
-void Solid::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
+void		Solid::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 {
    (void)clock;
   _position = glm::vec3(x, y, 0);
@@ -76,9 +76,10 @@ void Solid::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
   _geometry.draw(shader, getTransformation(), GL_QUADS);
 }
 
-glm::mat4 Solid::getTransformation()
+glm::mat4	Solid::getTransformation()
 {
-  glm::mat4 transform(1);
+  glm::mat4	transform(1);
+
   transform = glm::scale(transform, glm::vec3(20, 20, 20));
   transform = glm::translate(transform, _position);
   return (transform);

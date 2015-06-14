@@ -31,10 +31,9 @@ AObject *BlockFactory::createInstance(Map::status status)
   else if (status == Map::BREAK)
     return (new Break());
   else if (status == Map::P1 || status == Map::P2)
-    {
-      std::cout << "new player" << std::endl;
-      return (new Player());
-    }
+    return (new Player());
+  else if (status == Map::BOT)
+    return (new Bot());
   return (NULL);
 }
 // void BlockFactory::init_map() {

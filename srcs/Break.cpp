@@ -10,7 +10,7 @@ Break::~Break()
 
 }
 
-bool	Break::initialize()
+bool		Break::initialize()
 {
   if (_texture.load("./img/break.tga") == false)
     {
@@ -62,13 +62,13 @@ bool	Break::initialize()
   return (true);
 }
 
-void	Break::update(gdl::Clock const &clock, gdl::Input &input)
+void		Break::update(gdl::Clock const &clock, gdl::Input &input)
 {
   (void)clock;
   (void)input;
 }
 
-void Break::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
+void		Break::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 {
   (void)clock;
   (void)clock;
@@ -77,9 +77,10 @@ void Break::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
   _geometry.draw(shader, getTransformation(), GL_QUADS);
 }
 
-glm::mat4 Break::getTransformation()
+glm::mat4	Break::getTransformation()
 {
-  glm::mat4 transform(1);
+  glm::mat4	transform(1);
+
   transform = glm::scale(transform, glm::vec3(20, 20, 20));
   transform = glm::translate(transform, _position);
   return (transform);

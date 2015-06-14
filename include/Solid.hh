@@ -8,14 +8,15 @@ class Solid : public AObject
 public:
   Solid();
   virtual ~Solid();
-  virtual bool initialize();
-  virtual void update(gdl::Clock const &clock, gdl::Input &input);
-  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int, int);
-  glm::mat4 getTransformation();
 
-private:
-  gdl::Texture _texture;
-  gdl::Geometry _geometry;
+  virtual bool		initialize();
+  virtual void		update(gdl::Clock const &clock, gdl::Input &input);
+  virtual void		draw(gdl::AShader &shader, gdl::Clock const &clock, int, int);
+  glm::mat4		getTransformation();
+
+protected:
+  gdl::Texture		_texture;
+  gdl::Geometry		_geometry;
 };
 
 #endif /* !__SOLID_HH__ */

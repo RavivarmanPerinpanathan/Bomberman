@@ -1,33 +1,22 @@
 #ifndef __BOT_HH__
 # define __BOT_HH__
 
-#include <iostream>
-#include <string>
 #include "AObject.hh"
 
 class Bot : public AObject
 {
 public:
   Bot();
-  ~Bot();
-  Bot(Bot const &);
-  Bot	&operator=(Bot const &);
-  virtual bool	initialize();
-  virtual void	update();
-  virtual void	draw();
-  glm::mat4	getTransformation();
+  virtual ~Bot();
 
-  std::pair<int, int>	getPos() const;
-  void			setPos(std::pair<int, int>);
-
-private:
-  
-  gdl::Texture	_texture;
-  gdl::Geometry	_geometry;
-
+  virtual bool		initialize();
+  virtual void		update(gdl::Clock const &clock, gdl::Input &input);
+  virtual void		draw(gdl::AShader &shader, gdl::Clock const &clock, int, int);
+  glm::mat4		getTransformation();
 
 protected:
-  std::pair<int, int>	_pos;
+  gdl::Texture		_texture;
+  gdl::Geometry		_geometry;
 };
 
 #endif /* !__BOT_HH__ */

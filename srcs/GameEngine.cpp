@@ -13,7 +13,7 @@ GameEngine::~GameEngine()
   //   delete it->second;
 }
 
-bool GameEngine::initialize()
+bool		GameEngine::initialize()
 {
   if (!_context.start(1600, 1000, "My bomberman!"))
     return false;
@@ -59,26 +59,20 @@ bool GameEngine::initialize()
       	  player->setId((*it).second - 7);
   	  _players.push_back(player);
   	}
-    }
-  std::cout << "ok" << std::endl;
-  // AObject *player = new Solid();
-  // if (player->initialize() == false)
-  //   return (false);
-  // _players.push_back(player);
-  // std::cout << "ici" << std::endl;
-  // for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-  //   {
-  //     std::cout << "in" << std::endl;
-  //     (*it)->getMap()->showMap();
-  //     std::cout << (*it)->getId() << std::endl;
-  //     std::cout << (*it)->getPos().first << (*it)->getPos().second << std::endl;
-  //     //(*it)->update(_clock, _input);
-  //     (*it)->draw(_shader, _clock, (*it)->getPos().first, (*it)->getPos().second);
-  //     std::cout << "out" << std::endl;
-  //   }
+      if ((*it).second == Map::BOT)
+      	{
+      	  AObject *bot;
 
-  audio.setGameOverMusicVolume(80);
-  audio.playGameOverMusic();
+      	  bot = _blockFactory.createInstance((*it).second);
+      	  if (bot->initialize() == false)
+      	    return false;
+      	  bot->setPos((*it).first);
+      	  _bots.push_back(bot);
+      	}
+    }
+
+  _audio.setGameOverMusicVolume(80);
+  _audio.playGameOverMusic();
 
   float box = ((_map.getWidth() + _map.getHeight())/2) * _size * 3;
 
@@ -87,7 +81,7 @@ bool GameEngine::initialize()
   return true;
 }
 
-bool GameEngine::update()
+bool		GameEngine::update()
 {
   _context.updateClock(_clock);
   _context.updateInputs(_input);
@@ -95,11 +89,9 @@ bool GameEngine::update()
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
     return false;
   if (_input.getKey(SDLK_KP_5))
-    setView(40.0f, -25.0f, 10.0f);
+    setView(_map.getWidth()/2,( _map.getHeight()/2) - (_map.getWidth()/2), (_map.getHeight()/2) + (_map.getWidth()/3));
   if (_input.getKey(SDLK_KP_2))
     setView(0, _baseY - 2, _baseZ + 0.3f);
-  if (_input.getKey(SDLK_KP_ENTER))
-    _map.setRandomMap();
   if (_input.getKey(SDLK_KP_PLUS))
     setView(0, 0, _baseZ + 1);
   if (_input.getKey(SDLK_KP_MINUS))
@@ -118,95 +110,52 @@ bool GameEngine::update()
   _shader.setUniform("view", _transformation);
   _shader.setUniform("projection", _projection);
 
-  // for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-  //   {
-  //     std::cout << "infinity" << std::endl;
-  //     if ((*it)->getId() == 1)
-  // 	std::cout << "first" << std::endl;
-  //     if ((*it)->getId() == 1 && _input.getKey(SDLK_UP))
-  // 	(*it)->updateMap((*it)->getPos(), std::make_pair(-1, 0));
-  //   }
-
-  // for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
-  //   {
-  //     if (_objects[it->second])
-  //     	_objects[it->second]->update(_clock, _input);
-      // if (it->second == Map::P1)
-      // 	{
-      // 	  std::cout << "in" << std::endl;
-      // 	  _players[0]->draw(_shader, _clock,  it->first.second, it->first.first);
-      // 	}
-      // if (it->second == Map::P2)
-      // 	{
-      // 	  std::cout << "in" << std::endl;
-      // 	  _players[1]->draw(_shader, _clock,  it->first.second, it->first.first);
-      // 	}
-    // }
-  // std::cout << "ici" << std::endl;
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
     (*it)->update(_clock, _input);
-  // for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
-  //   it->update(_clock, _input);
   return true;
 }
 
-void GameEngine::draw()
+void		GameEngine::draw()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _texture.bind();
   _geometry.draw(_shader, getTransformation(), GL_QUADS);
   _shader.bind();
+
   for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
-    {
-      if (_objects[it->second])
-      	_objects[it->second]->draw(_shader, _clock, it->first.second, it->first.first);
-      // if (it->second == Map::P1)
-      // 	{
-      // 	  std::cout << "in" << std::endl;
-      // 	  _players[0]->draw(_shader, _clock,  it->first.second, it->first.first);
-      // 	}
-      // if (it->second == Map::P2)
-      // 	{
-      // 	  std::cout << "in" << std::endl;
-      // 	  _players[1]->draw(_shader, _clock,  it->first.second, it->first.first);
-      // 	}
-    }
-  // std::cout << "here" << std::endl;
-  // for (size_t i = 0; i < _players.size(); ++i)
-  //   {
-  //     std::cout << "in for" << std::endl;
-  //     _players[i]->draw(_shader, _clock, 20, 20);
-  //   }
+    if (_objects[it->second])
+      _objects[it->second]->draw(_shader, _clock, it->first.second, it->first.first);
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
     (*it)->draw(_shader, _clock, (*it)->getPos().second, (*it)->getPos().first);
-  // for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
-  //   it->draw(_shader, _clock, it->getPos());
+  for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
+    (*it)->draw(_shader, _clock, (*it)->getPos().second, (*it)->getPos().first);
   _context.flush();
 }
 
-void GameEngine::translate(glm::vec3 const &v)
+void		GameEngine::translate(glm::vec3 const &v)
 {
   _position += v;
 }
 
-void GameEngine::rotate(glm::vec3 const& axis, float angle)
+void		GameEngine::rotate(glm::vec3 const& axis, float angle)
 {
   _rotation += axis * angle;
 }
 
-void GameEngine::scale(glm::vec3 const& scale)
+void		GameEngine::scale(glm::vec3 const& scale)
 {
   _scale *= scale;
 }
 
-glm::mat4 GameEngine::getTransformation()
+glm::mat4      	GameEngine::getTransformation()
 {
-  glm::mat4 transform(1);
+  glm::mat4    	transform(1);
+
   transform = glm::scale(transform, glm::vec3(20, 20, 1));
   return (transform);
 }
 
-void		GameEngine::setView(float x, float y, float z)
+void   		GameEngine::setView(float x, float y, float z)
 {
   if (x != 0)
     _baseX = x;
@@ -214,8 +163,4 @@ void		GameEngine::setView(float x, float y, float z)
     _baseY = y;
   if (z != 0)
     _baseZ = z;
-  // std::cout << "###########" << std::endl;
-  // std::cout << "x = " << _baseX*_size << std::endl;
-  // std::cout << "y = " <<_baseY*_size << std::endl;
-  // std::cout << "z = " << _baseZ*_size << std::endl;
 }

@@ -30,21 +30,21 @@ public:
   void			setMap(Map *);
 
   void			updateMap(std::pair<int, int>, std::pair<int, int>);
-  virtual bool initialize() = 0;
-  virtual void update(gdl::Clock const &, gdl::Input &) = 0;
-  virtual void draw(gdl::AShader &, gdl::Clock const &, int, int) = 0;
-  void translate(glm::vec3 const &);
-  void rotate(glm::vec3 const&, float);
-  void scale(glm::vec3 const&);
-  glm::mat4 getTransformation();
+  virtual bool		initialize() = 0;
+  virtual void		update(gdl::Clock const &, gdl::Input &) = 0;
+  virtual void		draw(gdl::AShader &, gdl::Clock const &, int, int) = 0;
+  void			translate(glm::vec3 const &);
+  void			rotate(glm::vec3 const&, float);
+  void			scale(glm::vec3 const&);
+  glm::mat4		getTransformation();
 
 protected:
-  glm::vec3 _position;
-  glm::vec3 _rotation;
-  glm::vec3 _scale;
+  glm::vec3		_position;
+  glm::vec3		_rotation;
+  glm::vec3		_scale;
   std::pair<int, int>	_pos;
   int			_id;
-  Map	    *_map;
+  Map			*_map;
 };
 
 #endif /* !__AOBJECT_HH__ */

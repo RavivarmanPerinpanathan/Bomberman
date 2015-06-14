@@ -31,14 +31,14 @@ int			Menu::eventHandler()
   /* si on catch click souris sur le bouton "Menu" */
   int		playerInput = 2;
   int		botInput = 10; /* récupère input nb bots */
-  int		xMap = 30; /* récupère input x de la map */
-  int		yMap = 20; /* récupère input y de la map */
+  int		xMap = 100; /* récupère input x de la map */
+  int		yMap = 100; /* récupère input y de la map */
 
   Map		map(xMap, yMap, playerInput, botInput);
 
   if (map.getWidth() < 10 || map.getHeight() < 10 || map.setRandomMap() == 1)
     return (1);
-  map.showMap();
+  // map.showMap();
   run(map);
   /* --------------------------------------------- */
   return (0);

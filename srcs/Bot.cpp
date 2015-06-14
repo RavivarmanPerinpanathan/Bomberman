@@ -1,7 +1,3 @@
-//
-// Created by navarr_a on 06/06/15.
-//
-
 #include "Bot.hh"
 
 Bot::Bot()
@@ -14,44 +10,80 @@ Bot::~Bot()
 
 }
 
-Bot::Bot(Bot const &c)
-  : _pos(c._pos)
+bool		Bot::initialize()
 {
-
-}
-
-Bot		&Bot::operator=(Bot const &c)
-{
-  if (this != &c)
+  if (_texture.load("./img/brick.tga") == false)
     {
-      _pos = c._pos;
+      std::cerr << "Cannot load the ground texture" << std::endl;
+      return (false);
     }
-  return (*this);
-}
 
-std::pair<int, int>	Bot::getPos() const
-{
-  return (_pos);
-}
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 0));
+  _geometry.pushVertex(glm::vec3(1, 0, 0));
+  _geometry.pushVertex(glm::vec3(1, 0, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 1));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
 
-void			Bot::setPos(std::pair<int, int> pos)
-{
-  _pos = pos;
-}
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1));
+  _geometry.pushVertex(glm::vec3(0, 1, 1));
+  _geometry.pushVertex(glm::vec3(1, 1, 1));
+  _geometry.pushVertex(glm::vec3(1, 0, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 1));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
 
-bool	Bot::initialize()
-{
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1));
+  _geometry.pushVertex(glm::vec3(1, 0, 0));
+  _geometry.pushVertex(glm::vec3(1, 0, 1));
+  _geometry.pushVertex(glm::vec3(1, 1, 1));
+  _geometry.pushVertex(glm::vec3(1, 1, 0));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+
+  _geometry.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1));
+  _geometry.pushVertex(glm::vec3(0, 0, 0));
+  _geometry.pushVertex(glm::vec3(0, 0, 1));
+  _geometry.pushVertex(glm::vec3(0, 1, 1));
+  _geometry.pushVertex(glm::vec3(0, 1, 0));
+  _geometry.pushUv(glm::vec2(0.0f, 1.0f));
+  _geometry.pushUv(glm::vec2(0.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 0.0f));
+  _geometry.pushUv(glm::vec2(1.0f, 1.0f));
+
+  _geometry.build();
   return (true);
 }
 
-void	Bot::update()
-{}
+void		Bot::update(gdl::Clock const &clock, gdl::Input &input)
+{
+  (void)clock;
+  (void)input;
+}
 
-void	Bot::draw()
-{}
+void		Bot::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
+{
+  (void)clock;
+  // (void)shader;
+  // (void)x;
+  // (void)y;
+  _position = glm::vec3(x, y, 0);
+  _texture.bind();
+  _geometry.draw(shader, getTransformation(), GL_QUADS);
+}
 
 glm::mat4	Bot::getTransformation()
 {
   glm::mat4	transform(1);
+
+  transform = glm::scale(transform, glm::vec3(20, 20, 20));
+  transform = glm::translate(transform, _position);
   return (transform);
 }

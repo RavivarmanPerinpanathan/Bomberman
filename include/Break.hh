@@ -8,14 +8,15 @@ class Break : public AObject
 public:
   Break();
   virtual ~Break();
-  virtual bool initialize();
-  virtual void update(gdl::Clock const &clock, gdl::Input &input);
-  virtual void draw(gdl::AShader &shader, gdl::Clock const &clock, int, int);
-  glm::mat4 getTransformation();
+
+  virtual bool		initialize();
+  virtual void		update(gdl::Clock const &clock, gdl::Input &input);
+  virtual void		draw(gdl::AShader &shader, gdl::Clock const &clock, int, int);
+  glm::mat4		getTransformation();
 
 private:
-  gdl::Texture _texture;
-  gdl::Geometry _geometry;
+  gdl::Texture		_texture;
+  gdl::Geometry		_geometry;
 };
 
 #endif /* !__BREAK_HH__ */
