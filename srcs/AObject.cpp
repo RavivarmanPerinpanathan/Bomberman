@@ -43,7 +43,6 @@ void			AObject::setMap(Map *map)
 
 void		AObject::updateMap(std::pair<int, int> curPos, std::pair<int, int> newPos)
 {
-  // std::cout << "MOVE" << std::endl;
   newPos.first = curPos.first + newPos.first;
   newPos.second = curPos.second + newPos.second;
   if (getMap()->getMap()[newPos] == Map::EMPTY || getMap()->getMap()[newPos] == Map::RANGE

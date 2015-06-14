@@ -1,5 +1,5 @@
-#ifndef __SPEED_HH_
-# define __SPEED_HH_
+#ifndef __SPEED_HH__
+# define __SPEED_HH__
 
 #include "AObject.hh"
 
@@ -7,15 +7,16 @@ class Speed : public AObject
 {
 public:
   Speed();
-  virtual	~Speed();
-  virtual	bool initialize();
-  virtual	void update();
-  virtual	void draw();
-  glm::mat4	getTransformation();
-  
-private:
-  gdl::Texture	_texture;
-  gdl::Geometry	_geometry;
+  virtual ~Speed();
+
+  virtual bool		initialize();
+  virtual void		update(gdl::Input &input);
+  virtual void		draw(gdl::AShader &shader, int, int);
+  glm::mat4		getTransformation();
+
+protected:
+  gdl::Texture		_texture;
+  gdl::Geometry		_geometry;
 };
 
-#endif /* !__SPEED_HH_ */
+#endif /* !__SPEED_HH__ */

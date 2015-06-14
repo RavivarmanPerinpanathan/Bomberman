@@ -62,18 +62,13 @@ bool		Bot::initialize()
   return (true);
 }
 
-void		Bot::update(gdl::Clock const &clock, gdl::Input &input)
+void		Bot::update(gdl::Input &input)
 {
-  (void)clock;
   (void)input;
 }
 
-void		Bot::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
+void		Bot::draw(gdl::AShader &shader, int x, int y)
 {
-  (void)clock;
-  // (void)shader;
-  // (void)x;
-  // (void)y;
   _position = glm::vec3(x, y, 0);
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);

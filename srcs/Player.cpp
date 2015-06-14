@@ -62,34 +62,28 @@ bool		Player::initialize()
   return (true);
 }
 
-void		Player::update(gdl::Clock const &clock, gdl::Input &input)
+void		Player::update(gdl::Input &input)
 {
-  (void)clock;
-  // (void)input;
   if (getId() == 0 && input.getKey(SDLK_UP))
-    updateMap(getPos(), std::make_pair(-1, 0));
-  if (getId() == 0 && input.getKey(SDLK_DOWN))
     updateMap(getPos(), std::make_pair(1, 0));
+  if (getId() == 0 && input.getKey(SDLK_DOWN))
+    updateMap(getPos(), std::make_pair(-1, 0));
   if (getId() == 0 && input.getKey(SDLK_LEFT))
     updateMap(getPos(), std::make_pair(0, -1));
   if (getId() == 0 && input.getKey(SDLK_RIGHT))
     updateMap(getPos(), std::make_pair(0, 1));
   if (getId() == 1 && input.getKey(SDLK_z))
-    updateMap(getPos(), std::make_pair(-1, 0));
-  if (getId() == 1 && input.getKey(SDLK_s))
     updateMap(getPos(), std::make_pair(1, 0));
+  if (getId() == 1 && input.getKey(SDLK_s))
+    updateMap(getPos(), std::make_pair(-1, 0));
   if (getId() == 1 && input.getKey(SDLK_q))
     updateMap(getPos(), std::make_pair(0, -1));
   if (getId() == 1 && input.getKey(SDLK_d))
     updateMap(getPos(), std::make_pair(0, 1));
 }
 
-void		Player::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
+void		Player::draw(gdl::AShader &shader, int x, int y)
 {
-  (void)clock;
-  // (void)shader;
-  // (void)x;
-  // (void)y;
   _position = glm::vec3(x, y, 0);
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);
@@ -98,6 +92,7 @@ void		Player::draw(gdl::AShader &shader, gdl::Clock const &clock, int x, int y)
 glm::mat4	Player::getTransformation()
 {
   glm::mat4	transform(1);
+
   transform = glm::scale(transform, glm::vec3(20, 20, 20));
   transform = glm::translate(transform, _position);
   return (transform);

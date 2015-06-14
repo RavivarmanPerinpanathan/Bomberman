@@ -111,7 +111,7 @@ bool		GameEngine::update()
   _shader.setUniform("projection", _projection);
 
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-    (*it)->update(_clock, _input);
+    (*it)->update(_input);
   return true;
 }
 
@@ -124,11 +124,11 @@ void		GameEngine::draw()
 
   for (std::map<std::pair<int, int>, Map::status>::iterator it = _map.getMap().begin(); it != _map.getMap().end(); ++it)
     if (_objects[it->second])
-      _objects[it->second]->draw(_shader, _clock, it->first.second, it->first.first);
+      _objects[it->second]->draw(_shader, it->first.second, it->first.first);
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
-    (*it)->draw(_shader, _clock, (*it)->getPos().second, (*it)->getPos().first);
+    (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
   for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end(); ++it)
-    (*it)->draw(_shader, _clock, (*it)->getPos().second, (*it)->getPos().first);
+    (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
   _context.flush();
 }
 

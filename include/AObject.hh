@@ -31,8 +31,8 @@ public:
 
   void			updateMap(std::pair<int, int>, std::pair<int, int>);
   virtual bool		initialize() = 0;
-  virtual void		update(gdl::Clock const &, gdl::Input &) = 0;
-  virtual void		draw(gdl::AShader &, gdl::Clock const &, int, int) = 0;
+  virtual void		update(gdl::Input &) = 0;
+  virtual void		draw(gdl::AShader &, int, int) = 0;
   void			translate(glm::vec3 const &);
   void			rotate(glm::vec3 const&, float);
   void			scale(glm::vec3 const&);
