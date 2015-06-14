@@ -9,9 +9,7 @@ GameEngine::GameEngine(Map &map)
 
 GameEngine::~GameEngine()
 {
-  _objects.clear();
-  _players.clear();
-  _bots.clear();
+
 }
 
 bool		GameEngine::initialize()
@@ -119,10 +117,7 @@ void		GameEngine::drawCharacters()
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end();)
     {
       if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
-	{
-	  delete (*it);
-	  it = _players.erase(it);
-	}
+	it = _players.erase(it);
       else
 	{
 	  (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);
@@ -132,10 +127,7 @@ void		GameEngine::drawCharacters()
   for (std::vector<AObject *>::iterator it = _bots.begin(); it != _bots.end();)
     {
       if (_map.getMap()[(*it)->getPos()] == Map::EMPTY)
-	{
-	  delete (*it);
-	  it = _bots.erase(it);
-	}
+	it = _bots.erase(it);
       else
 	{
 	  (*it)->draw(_shader, (*it)->getPos().second, (*it)->getPos().first);

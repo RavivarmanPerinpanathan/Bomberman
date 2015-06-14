@@ -2,7 +2,7 @@
 
 Bomb::Bomb()
 {
-
+  _time = 0;
 }
 
 Bomb::~Bomb()
@@ -63,7 +63,10 @@ bool		Bomb::update(gdl::SdlContext context, gdl::Input &input)
   _time += _clock.getElapsed();
   context.updateClock(_clock);
   if (_time > 2.0f)
-    return false;
+    {
+      _time = 0;
+      return false;
+    }
   (void)input;
   return true;
 }

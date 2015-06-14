@@ -5,6 +5,7 @@ Player::Player()
   _range = 2;
   _simult = 1;
   _speed = 0.25f;
+  _time = 0;
 }
 
 Player::~Player()

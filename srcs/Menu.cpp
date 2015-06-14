@@ -116,10 +116,8 @@ bool			Menu::update()
 		if (map.getWidth() < 10 || map.getHeight() < 10 || map.setRandomMap() == 1)
 		  return (1);
 		_context.stop();
-		std::cout << "run" << std::endl;
 		if (run(map) == EXIT_SUCCESS)
 		  return (false);
-		std::cout << "out" << std::endl;
 	      }
 	  }
 	}
