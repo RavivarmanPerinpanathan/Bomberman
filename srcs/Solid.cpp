@@ -12,7 +12,7 @@ Solid::~Solid()
 
 bool		Solid::initialize()
 {
-  if (_texture.load("./img/break.tga") == false)
+  if (_texture.load("./img/solid.tga") == false)
     {
       std::cerr << "Cannot load the solid texture" << std::endl;
       return (false);

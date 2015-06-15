@@ -104,6 +104,8 @@ bool		GameEngine::update()
   _shader.setUniform("view", _transformation);
   _shader.setUniform("projection", _projection);
 
+  if (_players.empty())
+    return false;
   for (std::vector<AObject *>::iterator it = _players.begin(); it != _players.end(); ++it)
     (*it)->update(_context, _input);
 

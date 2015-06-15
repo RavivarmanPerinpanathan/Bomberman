@@ -91,10 +91,7 @@ bool		Player::update(gdl::SdlContext context, gdl::Input &input)
   for (std::vector<AObject *>::iterator it = _bomb.begin(); it != _bomb.end();)
     {
       if ((*it)->update(context, input) == false)
-	{
-	  updateBomb(it - _bomb.begin(), (*it));
-	  delete (*it);
-	}
+	updateBomb(it - _bomb.begin(), (*it));
       else
 	++it;
     }

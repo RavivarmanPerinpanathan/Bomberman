@@ -12,7 +12,7 @@ Break::~Break()
 
 bool		Break::initialize()
 {
-  if (_texture.load("./img/solid.tga") == false)
+  if (_texture.load("./img/break.tga") == false)
     {
       std::cerr << "Cannot load the break texture" << std::endl;
       return (false);
